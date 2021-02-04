@@ -1,12 +1,12 @@
 class GiphyApi {
   constructor(apiKey) {
-    this._apiKey = apiKey.apiKey;
-    this._username = apiKey.username;
+    this.apiKey = apiKey.apiKey;
+    this.username = apiKey.username;
   }
 
   search = async (query) => {
     const url = `https://api.giphy.com/v1/gifs/search`;
-    const params = `?api_key=${this._apiKey}&q=${query.term}&limit=${query.limit}`;
+    const params = `?api_key=${this.apiKey}&q=${query.term}&limit=${query.limit}`;
     const extens = `&offset=0&rating=G&lang=en`;
 
     const res = await fetch(url + params + extens);
@@ -23,7 +23,7 @@ class GiphyApi {
 
   suggestions = async (query) => {
     const url = `https://api.giphy.com/v1/tags/related/`;
-    const params = `${query.term}?api_key=${this._apiKey}`;
+    const params = `${query.term}?api_key=${this.apiKey}`;
 
     const res = await fetch(url + params);
     const json = await res.json();
@@ -32,7 +32,7 @@ class GiphyApi {
 
   trending = async () => {
     const url = `https://api.giphy.com/v1/trending/searches`;
-    const params = `?api_key=${this._apiKey}`;
+    const params = `?api_key=${this.apiKey}`;
 
     const res = await fetch(url + params);
     const json = await res.json();
@@ -41,7 +41,7 @@ class GiphyApi {
 
   upload = async (gifFile) => {
     const url = `https://upload.giphy.com/v1/gifs`;
-    const params = `?api_key=${this._apiKey}&username=${this._username}&file=${gifFile}`;
+    const params = `?api_key=${this.apiKey}&username=${this.username}&file=${gifFile}`;
     const extens = `&tags=gifos&source_post_url=https://hiwi.io/`;
 
     let options = {

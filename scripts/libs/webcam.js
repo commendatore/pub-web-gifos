@@ -10,7 +10,7 @@ class WebcamRecord {
       video: { width, height },
     };
 
-    this.configuration = {
+    this.config = {
       type: "gif",
       frameRate: 1,
       quality: 10,
@@ -30,15 +30,20 @@ class WebcamRecord {
 
   startRecording = () => {
     this.playback.srcObject = this.stream;
-    this.recorder = RecordRTC(this.stream, this.configuration);
+    this.recorder = RecordRTC(this.stream, this.config);
     this.recorder.startRecording();
   };
 
   // FIXME: UNABLE TO SEND BLOB
   stopRecording = () => {
     this.recorder.stopRecording();
+    this.playback.src = URL.createObjectURL(this.recorder.getBlob());
     let form = new FormData();
-    form.append("file", this.recorder.getBlob(), "myGif.gif");
+    form.append(
+      "file",
+      URL.createObjectURL(this.recorder.getBlob()),
+      "myGifOS.gif"
+    );
     this.file = form.get("file");
   };
 }
