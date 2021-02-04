@@ -1,0 +1,17 @@
+/* 
+  responsive for mobile
+  main container with sections
+*/
+.main {
+  padding-top: 6.25rem;
+  width: 100vw;
+  height: 1100px;
+  background-color: grey;
+}
+
+// 768px desktop design
+@media (min-width: 48rem) {
+  .main {
+    padding-top: 5.938rem;
+  }
+}

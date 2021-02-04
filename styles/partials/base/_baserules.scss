@@ -1,0 +1,19 @@
+body {
+  font-family: $primary-font, $secondary-font;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+}
+
+/*
+  limit screen max width to 1440px = 90rem
+  and center the container in the viewport
+*/
+@media (min-width: 90rem) {
+  header,
+  main,
+  footer {
+    min-width: 20rem;
+    max-width: 90rem;
+    margin: 0 calc((100vw - 90rem) / 2);
+  }
+}

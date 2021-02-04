@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>GifOS</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="navbar">
+        <div class="navbar-logo">
+          <a class="navbar-logo__link" href="/index.html"></a>
+        </div>
+        <div class="navbar-menu navbar-menu--close" id="navbar-menu">
+          <ul class="navbar-menu__list">
+            <li class="navbar-menu__item">
+              <a class="navbar-menu__link" href="#dark-theme">Modo Nocturno</a>
+            </li>
+            <li class="navbar-menu__item">
+              <a class="navbar-menu__link" href="/app/favs.html">Favoritos</a>
+            </li>
+            <li class="navbar-menu__item">
+              <a class="navbar-menu__link" href="/app/gifos.html">Mis GIFOS</a>
+            </li>
+          </ul>
+        </div>
+        <div class="navbar-buttons">
+          <a class="navbar-buttons__create-gif" href="/app/create.html"> </a>
+          <input
+            class="navbar-buttons__hamburguer navbar-buttons__hamburguer--show"
+            id="navbar-buttons__hamburguer"
+            type="button"
+            value="hamburguer"
+          />
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="webcam-video">
+        <video
+          class="webcam-video__playback"
+          playsinline
+          autoplay
+          id="webcam-video__playback"
+        ></video>
+      </div>
+      <div class="webcam-controls">
+        <button
+          class="webcam-controls__button"
+          aria-label="play pause toggle"
+          name="rec"
+          id="rec"
+        >
+          Grabar
+        </button>
+        <button
+          class="webcam-controls__button"
+          aria-label="stop"
+          name="stop"
+          id="stop"
+        >
+          Detener
+        </button>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-social">
+        <p class="footer-social__text">Compartir en:</p>
+      </div>
+      <div class="footer-icons">
+        <ul class="footer-icons__list">
+          <li class="footer-icons__item">
+            <a
+              class="footer-icons__link"
+              href="https://es-la.facebook.com/"
+              target="_blank"
+            >
+              <i class="fab fa-facebook"></i>
+            </a>
+          </li>
+
+          <li class="footer-icons__item">
+            <a
+              class="footer-icons__link"
+              href="https://twitter.com/"
+              target="_blank"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+
+          <li class="footer-icons__item">
+            <a
+              class="footer-icons__link"
+              href="https://instagram.com/"
+              target="_blank"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-copyright">
+        <p class="footer-copyright__text">© GIFOS 2020 All Rights Reserved.</p>
+      </div>
+    </footer>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.6.1/RecordRTC.min.js"
+      integrity="sha512-JdnCTTJRivaH4nStpZnsHO5Fm6TmgWHwwyPfhTPMgHGOz4GRzynCnm1T28C7Ees55ERL+t+gqg/DQro9oROd0w=="
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="/scripts/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+// 320px design mobile
+
+.webcam-video {
+  display: flex;
+  justify-content: center;
+}
+
+.webcam-video__playback {
+  padding-top: 6rem;
+}
+
+.webcam-controls {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.webcam-controls__button {
+  margin-left: 1rem;
+  padding: 0.5rem;
+}
+
+// 768px design desktop
+@media (min-width: 48rem) {
+}

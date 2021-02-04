@@ -1,0 +1,21 @@
+/* theme colors */
+:root {
+  --primary-color: #000000;
+  --secondary-color: #572ee5;
+  --secondary-color-dec: 87, 46, 229;
+  --font-color: #424242;
+  --bg-color: #fff;
+  --heading-color: #292922;
+}
+
+[data-theme="dark"] {
+  --primary-color: #9a97f3;
+  --secondary-color: #818cab;
+  --font-color: #e1e1ff;
+  --bg-color: #161625;
+  --heading-color: #818cab;
+}
+
+/* theme fonts */
+$primary-font: "Roboto", sans-serif;
+$secondary-font: "Montserrat", sans-serif;
