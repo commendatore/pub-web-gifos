@@ -200,6 +200,9 @@ body {
     transition: transform 0.2s ease;
     transition: transform 0.2s ease, -webkit-transform 0.2s ease;
   }
+  .navbar-menu--show {
+    top: 0;
+  }
   .navbar-menu__list {
     padding-right: 9.75rem;
   }

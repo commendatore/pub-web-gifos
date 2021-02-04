@@ -118,8 +118,11 @@
     transition: transform 0.2s ease;
   }
 
+  .navbar-menu--show {
+    top: 0;
+  }
+
   .navbar-menu__list {
-    // padding-right: 3.688rem;
     padding-right: 9.75rem;
   }
 
