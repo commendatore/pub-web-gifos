@@ -1,9 +1,9 @@
 class WebcamRecord {
-  constructor(playback, width, height) {
-    this.playback = playback;
+  constructor(playvideo, width, height) {
+    this.playvideo = playvideo;
     this.stream;
     this.recorder;
-    this.file;
+    this.gifData;
 
     this.constraints = {
       audio: false,
@@ -23,28 +23,32 @@ class WebcamRecord {
     try {
       this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
     } catch (err) {
-      alert("No se puede iniciar la cámara. Revise la consola");
+      alert("No se puede iniciar la cámara, revise la consola.");
       console.error(err);
     }
   };
 
+  saveGifData = () => {
+    const form = new FormData();
+    form.append("file", this.recorder.getBlob(), "myGifOS.gif");
+    console.log(form.get("file"));
+    this.gifData = form;
+  };
+
   startRecording = () => {
-    this.playback.srcObject = this.stream;
+    this.playvideo.srcObject = this.stream;
     this.recorder = RecordRTC(this.stream, this.config);
     this.recorder.startRecording();
   };
 
-  // FIXME: UNABLE TO SEND BLOB
   stopRecording = () => {
-    this.recorder.stopRecording();
-    this.playback.src = URL.createObjectURL(this.recorder.getBlob());
-    let form = new FormData();
-    form.append(
-      "file",
-      URL.createObjectURL(this.recorder.getBlob()),
-      "myGifOS.gif"
-    );
-    this.file = form.get("file");
+    this.recorder.stopRecording(this.saveGifData);
+    this.playvideo.srcObject = null;
+    this.recorder = null;
+  };
+
+  startPlayback = (playgif) => {
+    playgif.src = URL.createObjectURL(this.gifData.get("file"));
   };
 }
 

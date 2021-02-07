@@ -28,7 +28,7 @@ button:focus {
 }
 
 [data-theme="dark"] {
-  --bg-color: #161625;
+  --bg-color: #37383c;
   --font-color: #e1e1ff;
   --primary-color: #9a97f3;
   --secondary-color: #818cab;
@@ -147,7 +147,7 @@ body {
   text-decoration: none;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
-  color: var(--bg-color);
+  color: #fff;
 }
 
 .navbar-menu__item-separator {
@@ -406,20 +406,27 @@ body {
   }
 }
 
-.webcam-video {
+.video-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  height: 33rem;
 }
 
-.webcam-video__playback {
-  padding-top: 6rem;
+.video-webcam__playback {
+  display: inline-block;
+  padding-top: 1rem;
 }
 
-.webcam-controls {
+.video-gif__playback {
+  display: none;
+  padding-top: 1rem;
+}
+
+.video-controls {
   margin-top: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -429,7 +436,7 @@ body {
           justify-content: center;
 }
 
-.webcam-controls__button {
+.video-controls__button {
   margin-left: 1rem;
   padding: 0.5rem;
 }

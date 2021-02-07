@@ -1,21 +1,28 @@
 // 320px design mobile
 
-.webcam-video {
+.video-container {
   display: flex;
   justify-content: center;
+  height: 33rem;
 }
 
-.webcam-video__playback {
-  padding-top: 6rem;
+.video-webcam__playback {
+  display: inline-block;
+  padding-top: 1rem;
 }
 
-.webcam-controls {
+.video-gif__playback {
+  display: none;
+  padding-top: 1rem;
+}
+
+.video-controls {
   margin-top: 2rem;
   display: flex;
   justify-content: center;
 }
 
-.webcam-controls__button {
+.video-controls__button {
   margin-left: 1rem;
   padding: 0.5rem;
 }

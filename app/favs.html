@@ -3,7 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link
+      rel="icon"
+      sizes="32x32"
+      href="./assets/logo-mobile.svg"
+      type="image/svg+xml"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.6.1/RecordRTC.min.js"
+      integrity="sha512-JdnCTTJRivaH4nStpZnsHO5Fm6TmgWHwwyPfhTPMgHGOz4GRzynCnm1T28C7Ees55ERL+t+gqg/DQro9oROd0w=="
+      crossorigin="anonymous"
+    ></script>
     <title>GifOS</title>
   </head>
   <body>
@@ -15,7 +26,12 @@
         <div class="navbar-menu navbar-menu--close" id="navbar-menu">
           <ul class="navbar-menu__list">
             <li class="navbar-menu__item">
-              <a class="navbar-menu__link" href="#dark-theme">Modo Nocturno</a>
+              <a
+                class="navbar-menu__link"
+                href="#theme-switch"
+                id="navbar-menu__theme-switch"
+                >Modo Nocturno</a
+              >
               <span class="navbar-menu__item-separator"></span>
             </li>
             <li class="navbar-menu__item">
@@ -83,12 +99,6 @@
         <p class="footer-copyright__text">© GIFOS 2020 All Rights Reserved.</p>
       </div>
     </footer>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.6.1/RecordRTC.min.js"
-      integrity="sha512-JdnCTTJRivaH4nStpZnsHO5Fm6TmgWHwwyPfhTPMgHGOz4GRzynCnm1T28C7Ees55ERL+t+gqg/DQro9oROd0w=="
-      crossorigin="anonymous"
-    ></script>
     <script type="module" src="/scripts/app.js"></script>
   </body>
 </html>

@@ -1,15 +1,17 @@
-class GiphyApi {
+class GiphyAPI {
   constructor(apiKey) {
-    this.apiKey = apiKey.apiKey;
-    this.username = apiKey.username;
+    this.urlAPI = `https://api.giphy.com/v1`;
+    this.urlUpload = `https://upload.giphy.com/v1`;
+    this.apiKey = `api_key=${apiKey.apiKey}`;
+    this.username = `username=${apiKey.username}`;
   }
 
   search = async (query) => {
-    const url = `https://api.giphy.com/v1/gifs/search`;
-    const params = `?api_key=${this.apiKey}&q=${query.term}&limit=${query.limit}`;
-    const extens = `&offset=0&rating=G&lang=en`;
+    const path = `/gifs/search`;
+    const params = `?${this.apiKey}&q=${query.term}&limit=${query.limit}&offset=${query.offset}`;
+    const endpoint = this.urlAPI + path + params;
 
-    const res = await fetch(url + params + extens);
+    const res = await fetch(endpoint);
     const json = await res.json();
     return json.data.map((arr) => {
       return {
@@ -22,37 +24,58 @@ class GiphyApi {
   };
 
   suggestions = async (query) => {
-    const url = `https://api.giphy.com/v1/tags/related/`;
-    const params = `${query.term}?api_key=${this.apiKey}`;
+    const path = `/tags/related/${query.term}`;
+    const params = `?${this.apiKey}`;
+    const endpoint = this.urlAPI + path + params;
 
-    const res = await fetch(url + params);
+    const res = await fetch(endpoint);
     const json = await res.json();
     return json.data;
   };
 
   trending = async () => {
-    const url = `https://api.giphy.com/v1/trending/searches`;
-    const params = `?api_key=${this.apiKey}`;
+    const path = `/trending/searches`;
+    const params = `?${this.apiKey}`;
+    const endpoint = this.urlAPI + path + params;
 
-    const res = await fetch(url + params);
+    const res = await fetch(endpoint);
     const json = await res.json();
     return json.data;
   };
 
-  upload = async (gifFile) => {
-    const url = `https://upload.giphy.com/v1/gifs`;
-    const params = `?api_key=${this.apiKey}&username=${this.username}&file=${gifFile}`;
-    const extens = `&tags=gifos&source_post_url=https://hiwi.io/`;
-
-    let options = {
+  upload = async (gifData) => {
+    const path = `/gifs`;
+    const params = `?${this.apiKey}&${this.username}`;
+    const endpoint = this.urlUpload + path + params;
+    const options = {
       method: "POST",
-      mode: "no-cors",
+      body: gifData,
     };
 
-    const res = await fetch(url + params + extens, options);
+    try {
+      const res = await fetch(endpoint, options);
+      try {
+        const json = await res.json();
+        return json.data.id;
+      } catch (err) {
+        console.error("upload fetch error: json");
+        console.error(err);
+      }
+    } catch (err) {
+      console.error("upload fetch error: endpoint");
+      console.error(err);
+    }
+  };
+
+  getGif = async (gifId) => {
+    const path = `/gifs/${gifId}`;
+    const params = `?${this.apiKey}`;
+    const endpoint = this.urlAPI + path + params;
+
+    const res = await fetch(endpoint);
     const json = await res.json();
-    return json.data;
+    return json.data.images.original.url;
   };
 }
 
-export { GiphyApi };
+export { GiphyAPI };

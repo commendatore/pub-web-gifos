@@ -3,7 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link
+      rel="icon"
+      sizes="32x32"
+      href="./assets/logo-mobile.svg"
+      type="image/svg+xml"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.6.1/RecordRTC.min.js"
+      integrity="sha512-JdnCTTJRivaH4nStpZnsHO5Fm6TmgWHwwyPfhTPMgHGOz4GRzynCnm1T28C7Ees55ERL+t+gqg/DQro9oROd0w=="
+      crossorigin="anonymous"
+    ></script>
     <title>GifOS</title>
   </head>
   <body>
@@ -15,7 +26,12 @@
         <div class="navbar-menu navbar-menu--close" id="navbar-menu">
           <ul class="navbar-menu__list">
             <li class="navbar-menu__item">
-              <a class="navbar-menu__link" href="#dark-theme">Modo Nocturno</a>
+              <a
+                class="navbar-menu__link"
+                href="#theme-switch"
+                id="navbar-menu__theme-switch"
+                >Modo Nocturno</a
+              >
               <span class="navbar-menu__item-separator"></span>
             </li>
             <li class="navbar-menu__item">
@@ -40,17 +56,23 @@
       </div>
     </header>
     <main class="main">
-      <div class="webcam-video">
+      <div class="video-container">
         <video
-          class="webcam-video__playback"
+          class="video-webcam__playback"
           playsinline
           autoplay
-          id="webcam-video__playback"
+          id="video-webcam__playback"
         ></video>
+        <img
+          class="video-gif__playback"
+          src=""
+          alt=""
+          id="video-gif__playback"
+        />
       </div>
-      <div class="webcam-controls">
+      <div class="video-controls">
         <button
-          class="webcam-controls__button"
+          class="video-controls__button"
           aria-label="play pause toggle"
           name="rec"
           id="rec"
@@ -58,12 +80,21 @@
           Grabar
         </button>
         <button
-          class="webcam-controls__button"
+          class="video-controls__button"
           aria-label="stop"
           name="stop"
           id="stop"
         >
           Detener
+        </button>
+        </button>
+        <button
+          class="video-controls__button"
+          aria-label="upload"
+          name="upload"
+          id="upload"
+        >
+          Upload
         </button>
       </div>
     </main>
@@ -108,11 +139,6 @@
         <p class="footer-copyright__text">© GIFOS 2020 All Rights Reserved.</p>
       </div>
     </footer>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.6.1/RecordRTC.min.js"
-      integrity="sha512-JdnCTTJRivaH4nStpZnsHO5Fm6TmgWHwwyPfhTPMgHGOz4GRzynCnm1T28C7Ees55ERL+t+gqg/DQro9oROd0w=="
-      crossorigin="anonymous"
-    ></script>
     <script type="module" src="/scripts/app.js"></script>
   </body>
 </html>
