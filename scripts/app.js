@@ -47,7 +47,8 @@ if (videoWebcamPlayback !== null) {
   };
 
   bttnUpload.onclick = async () => {
-    videoGifPlayback.src = null;
+    videoGifPlayback.src = "";
+    videoGifPlayback.display = "none";
 
     let gifId = await giphy.upload(webcamRecord.gifData);
     console.log(`gif id: ${gifId}`);
@@ -55,3 +56,8 @@ if (videoWebcamPlayback !== null) {
     console.log(gifURL);
   };
 }
+
+let path = window.location.pathname;
+let page = path.split("/").pop();
+let name = page.split(".").slice(0, -1).join(".");
+console.log(`current page: ${name}`);

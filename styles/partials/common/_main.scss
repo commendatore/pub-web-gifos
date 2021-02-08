@@ -1,12 +1,9 @@
-/* 
-  responsive for mobile
-  main container with sections
-*/
+// 320px mobile design
 .main {
   padding-top: 6.25rem;
   width: 100vw;
   height: 1100px;
-  background-color: grey;
+  background-color: var(--main-bg-color);
 }
 
 // 768px desktop design

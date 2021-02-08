@@ -15,8 +15,7 @@ class GiphyAPI {
     const json = await res.json();
     return json.data.map((arr) => {
       return {
-        fullsize: arr.images.downsized_large,
-        preview: arr.images.preview,
+        url: arr.images.original.url,
         title: arr.title,
         username: arr.username,
       };

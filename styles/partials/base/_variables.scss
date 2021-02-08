@@ -1,23 +1,43 @@
 /* theme colors */
 :root {
-  --bg-color: #fff;
-  --font-color: #424242;
-  --primary-color: #000000;
-  --secondary-color: #572ee5;
-  --secondary-color-dec: 87, 46, 229;
-  --heading-color: #5ed7c6;
-  --active-color: #9cafc3;
+  --main-bg-color: #fff;
+
+  --header-bg-color: #fff;
+  --header-border-top-color: #572ee5;
+  --navbar-menu-bg-color-dec: 87, 46, 229;
+  --navbar-menu-link-color: #fff;
+  --navbar-menu-link-desktop-color: #572ee5;
+  --navbar-menu-link-desktop-hover-color: #5ed7c6;
+  --navbar-menu-link-desktop-active-color: #9cafc3;
+  --navbar-menu-link-item-separator-color: #fff;
+
+  --footer-bg-color: #fff;
+  --footer-border-bottom-color: #572ee5;
+  --footer-icons-link-color: #cdd6e0;
+  --footer-icons-link-hover-color: #572ee5;
+  --footer-social-text-color: #000;
+  --footer-copyright-text-color: #000;
 }
 
 [data-theme="dark"] {
-  --bg-color: #37383c;
-  --font-color: #e1e1ff;
-  --primary-color: #9a97f3;
-  --secondary-color: #818cab;
-  --heading-color: #818cab;
-  --active-color: #9cafc3;
+  --main-bg-color: #37383c;
+
+  --header-bg-color: #37383c;
+  --header-border-top-color: #000000;
+  --navbar-menu-bg-color-dec: 0, 0, 0;
+  --navbar-menu-link-color: #fff;
+  --navbar-menu-link-desktop-color: #fff;
+  --navbar-menu-link-desktop-hover-color: #5ed7c6;
+  --navbar-menu-link-desktop-active-color: #9cafc3;
+  --navbar-menu-link-item-separator-color: #fff;
+
+  --footer-bg-color: #37383c;
+  --footer-border-bottom-color: #000000;
+  --footer-icons-link-color: #cdd6e0;
+  --footer-icons-link-hover-color: #fff;
+  --footer-social-text-color: #fff;
+  --footer-copyright-text-color: #fff;
 }
 
-/* theme fonts */
 $primary-font: "Roboto", sans-serif;
 $secondary-font: "Montserrat", sans-serif;

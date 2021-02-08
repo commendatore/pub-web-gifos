@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: var(--bg-color);
-  border-bottom: 0.313rem solid var(--secondary-color);
+  background-color: var(--footer-bg-color);
+  border-bottom: 0.313rem solid var(--footer-border-bottom-color);
 }
 
 .footer-social {
@@ -14,6 +14,7 @@
 }
 
 .footer-social__text {
+  color: var(--footer-social-text-color);
   font-family: $primary-font;
   font-size: 0.938rem;
   padding-top: 2.938rem;
@@ -37,13 +38,14 @@
 }
 
 .footer-icons__link {
-  color: var(--primary-color);
+  color: var(--footer-icons-link-color);
   &:hover {
-    color: var(--secondary-color);
+    color: var(--footer-icons-link-hover-color);
   }
 }
 
 .footer-copyright {
+  color: var(--footer-copyright-text-color);
   display: flex;
 }
 
