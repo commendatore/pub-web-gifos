@@ -2,18 +2,24 @@
 
 .video-container {
   display: flex;
-  justify-content: center;
-  height: 33rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 6rem;
+  // height: 35.75rem;
+  height: 100vh;
 }
 
 .video-webcam__playback {
+  width: 360px;
+  height: 240px;
   display: inline-block;
-  padding-top: 1rem;
 }
 
 .video-gif__playback {
+  width: 360px;
+  height: 240px;
   display: none;
-  padding-top: 1rem;
 }
 
 .video-controls {

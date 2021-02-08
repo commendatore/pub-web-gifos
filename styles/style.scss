@@ -13,9 +13,13 @@
 @import "./partials/base/baserules";
 
 // common elements
-@import "./partials/common/header";
 @import "./partials/common/main";
+@import "./partials/common/header";
 @import "./partials/common/footer";
 
 // components
+@import "./partials/components/home";
 @import "./partials/components/create";
+@import "./partials/components/trending";
+@import "./partials/components/favorites";
+@import "./partials/components/gifos";

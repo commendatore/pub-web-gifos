@@ -73,6 +73,18 @@ body {
   }
 }
 
+.main {
+  padding-top: 6.25rem;
+  width: 100vw;
+  background-color: var(--main-bg-color);
+}
+
+@media (min-width: 48rem) {
+  .main {
+    padding-top: 5.938rem;
+  }
+}
+
 .header {
   position: fixed;
   width: 100vw;
@@ -321,19 +333,6 @@ body {
   }
 }
 
-.main {
-  padding-top: 6.25rem;
-  width: 100vw;
-  height: 1100px;
-  background-color: var(--main-bg-color);
-}
-
-@media (min-width: 48rem) {
-  .main {
-    padding-top: 5.938rem;
-  }
-}
-
 .footer {
   width: 100vw;
   height: 12.563rem;
@@ -444,24 +443,38 @@ body {
   }
 }
 
+.home {
+  height: 41.563rem;
+}
+
 .video-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 33rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 6rem;
+  height: 100vh;
 }
 
 .video-webcam__playback {
+  width: 360px;
+  height: 240px;
   display: inline-block;
-  padding-top: 1rem;
 }
 
 .video-gif__playback {
+  width: 360px;
+  height: 240px;
   display: none;
-  padding-top: 1rem;
 }
 
 .video-controls {
@@ -477,5 +490,17 @@ body {
 .video-controls__button {
   margin-left: 1rem;
   padding: 0.5rem;
+}
+
+.trending {
+  height: 40rem;
+}
+
+.favorites {
+  height: 34.813rem;
+}
+
+.gifos {
+  height: 33.25rem;
 }
 /*# sourceMappingURL=style.css.map */
