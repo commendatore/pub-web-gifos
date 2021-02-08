@@ -1,38 +1,43 @@
 // 320px design mobile
-
-.video-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 6rem;
-  // height: 35.75rem;
-  height: 100vh;
-}
-
-.video-webcam__playback {
-  width: 360px;
-  height: 240px;
-  display: inline-block;
-}
-
-.video-gif__playback {
-  width: 360px;
-  height: 240px;
+.create-gif {
   display: none;
-}
-
-.video-controls {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-}
-
-.video-controls__button {
-  margin-left: 1rem;
-  padding: 0.5rem;
 }
 
 // 768px design desktop
 @media (min-width: 48rem) {
+  .create-gif {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 6rem;
+  }
+  .video {
+    height: 15rem;
+  }
+
+  .video-webcam__playback {
+    width: 360px;
+    height: 240px;
+    display: inline-block;
+  }
+
+  .video-gif__playback {
+    width: 360px;
+    height: 240px;
+    display: none;
+  }
+
+  .video-controls {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .video-controls__button {
+    margin-left: 1rem;
+    padding: 0.5rem;
+  }
 }

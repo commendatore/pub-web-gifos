@@ -1,3 +1,10 @@
 .home {
-  height: 41.563rem;
+  height: 29.375rem;
+}
+
+// 768px design desktop
+@media (min-width: 48rem) {
+  .home {
+    height: 41.563rem;
+  }
 }

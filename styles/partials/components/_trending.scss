@@ -1,3 +1,10 @@
 .trending {
-  height: 40rem;
+  height: 26.875rem;
+}
+
+// 768px design desktop
+@media (min-width: 48rem) {
+  .trending {
+    height: 40rem;
+  }
 }

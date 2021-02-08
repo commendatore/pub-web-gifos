@@ -19,6 +19,11 @@ class WebcamRecord {
     };
   }
 
+  getStreamAndRecord = async () => {
+    await this.captureCamera();
+    this.startRecording();
+  };
+
   captureCamera = async () => {
     try {
       this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
@@ -37,6 +42,7 @@ class WebcamRecord {
 
   startRecording = () => {
     this.playvideo.srcObject = this.stream;
+    this.playvideo.play();
     this.recorder = RecordRTC(this.stream, this.config);
     this.recorder.startRecording();
   };

@@ -28,7 +28,7 @@ const videoGifPlayback = document.getElementById("video-gif__playback");
 
 if (videoWebcamPlayback !== null) {
   const webcamRecord = new WebcamRecord(videoWebcamPlayback, 360, 240);
-  webcamRecord.captureCamera();
+
   const bttnRec = document.getElementById("rec");
   const bttnStop = document.getElementById("stop");
   const bttnUpload = document.getElementById("upload");
@@ -36,7 +36,7 @@ if (videoWebcamPlayback !== null) {
   bttnRec.onclick = () => {
     videoWebcamPlayback.style.display = "inline-block";
     videoGifPlayback.style.display = "none";
-    webcamRecord.startRecording();
+    webcamRecord.getStreamAndRecord();
   };
 
   bttnStop.onclick = () => {
@@ -48,7 +48,7 @@ if (videoWebcamPlayback !== null) {
 
   bttnUpload.onclick = async () => {
     videoGifPlayback.src = "";
-    videoGifPlayback.display = "none";
+    videoGifPlayback.style.display = "none";
 
     let gifId = await giphy.upload(webcamRecord.gifData);
     console.log(`gif id: ${gifId}`);
