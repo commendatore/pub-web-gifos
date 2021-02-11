@@ -30,11 +30,11 @@
   background-position: center center;
 }
 
-.navbar-logo__link--light-theme {
+.navbar-logo__link--light {
   background-image: url(../../../assets/logo-mobile.svg);
 }
 
-.navbar-logo__link--dark-theme {
+.navbar-logo__link--dark {
   background-image: url(../../../assets/logo-mobile-noc.svg);
 }
 
@@ -50,14 +50,15 @@
 // FIXME: HIDE OVERFLOW ON HEADER
 .navbar-menu--show {
   top: 5.938rem;
-  transform: translateY(0);
-  transition: transform 0.2s ease;
+  transform: translateX(0);
+  transition: transform 0.33s ease;
 }
 
 // TODO: ADD SEPARATED ANIM CLASSES
 .navbar-menu--close {
-  top: 0;
-  transform: translateY(-100%);
+  top: 5.938rem;
+  transform: translateX(100%);
+  transition: transform 0.33s ease;
 }
 
 .navbar-menu__list {
@@ -141,6 +142,10 @@
     top: auto;
   }
 
+  .navbar-menu--close {
+    top: auto;
+  }
+
   .navbar-menu__list {
     padding-right: 9.75rem;
   }
@@ -179,11 +184,11 @@
     margin-left: 9.75rem;
   }
 
-  .navbar-logo__link--light-theme {
+  .navbar-logo__link--light {
     background-image: url(../../../assets/logo-desktop.svg);
   }
 
-  .navbar-logo__link--dark-theme {
+  .navbar-logo__link--dark {
     background-image: url(../../../assets/logo-desktop-noc.svg);
   }
 
@@ -207,7 +212,7 @@
     background-color: transparent;
   }
 
-  .navbar-buttons__create-gif--light-theme {
+  .navbar-buttons__create-gif--light {
     background-image: url(../../../assets/CTA-crear-gifo.svg);
     &:hover {
       background-image: url(../../../assets/CTA-crear-gifo-hover.svg);
@@ -217,7 +222,7 @@
     }
   }
 
-  .navbar-buttons__create-gif--dark-theme {
+  .navbar-buttons__create-gif--dark {
     background-image: url(../../../assets/CTA-crear-gifo-modo-noc.svg);
     &:hover {
       background-image: url(../../../assets/CTA-crear-gifo-hover-modo-noc.svg);

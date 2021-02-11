@@ -125,11 +125,11 @@ body {
   background-position: center center;
 }
 
-.navbar-logo__link--light-theme {
+.navbar-logo__link--light {
   background-image: url(../../../assets/logo-mobile.svg);
 }
 
-.navbar-logo__link--dark-theme {
+.navbar-logo__link--dark {
   background-image: url(../../../assets/logo-mobile-noc.svg);
 }
 
@@ -144,18 +144,22 @@ body {
 
 .navbar-menu--show {
   top: 5.938rem;
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
-  -webkit-transition: -webkit-transform 0.2s ease;
-  transition: -webkit-transform 0.2s ease;
-  transition: transform 0.2s ease;
-  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition: -webkit-transform 0.33s ease;
+  transition: -webkit-transform 0.33s ease;
+  transition: transform 0.33s ease;
+  transition: transform 0.33s ease, -webkit-transform 0.33s ease;
 }
 
 .navbar-menu--close {
-  top: 0;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
+  top: 5.938rem;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: -webkit-transform 0.33s ease;
+  transition: -webkit-transform 0.33s ease;
+  transition: transform 0.33s ease;
+  transition: transform 0.33s ease, -webkit-transform 0.33s ease;
 }
 
 .navbar-menu__list {
@@ -256,6 +260,9 @@ body {
   .navbar-menu--show {
     top: auto;
   }
+  .navbar-menu--close {
+    top: auto;
+  }
   .navbar-menu__list {
     padding-right: 9.75rem;
   }
@@ -290,10 +297,10 @@ body {
     height: 3.75rem;
     margin-left: 9.75rem;
   }
-  .navbar-logo__link--light-theme {
+  .navbar-logo__link--light {
     background-image: url(../../../assets/logo-desktop.svg);
   }
-  .navbar-logo__link--dark-theme {
+  .navbar-logo__link--dark {
     background-image: url(../../../assets/logo-desktop-noc.svg);
   }
   .navbar-buttons__hamburguer {
@@ -314,22 +321,22 @@ body {
     margin-right: 9.75rem;
     background-color: transparent;
   }
-  .navbar-buttons__create-gif--light-theme {
+  .navbar-buttons__create-gif--light {
     background-image: url(../../../assets/CTA-crear-gifo.svg);
   }
-  .navbar-buttons__create-gif--light-theme:hover {
+  .navbar-buttons__create-gif--light:hover {
     background-image: url(../../../assets/CTA-crear-gifo-hover.svg);
   }
-  .navbar-buttons__create-gif--light-theme:active {
+  .navbar-buttons__create-gif--light:active {
     background-image: url(../../../assets/CTA-crear-gifo-active.svg);
   }
-  .navbar-buttons__create-gif--dark-theme {
+  .navbar-buttons__create-gif--dark {
     background-image: url(../../../assets/CTA-crear-gifo-modo-noc.svg);
   }
-  .navbar-buttons__create-gif--dark-theme:hover {
+  .navbar-buttons__create-gif--dark:hover {
     background-image: url(../../../assets/CTA-crear-gifo-hover-modo-noc.svg);
   }
-  .navbar-buttons__create-gif--dark-theme:active {
+  .navbar-buttons__create-gif--dark:active {
     background-image: url(../../../assets/CTA-crear-gifo-active-modo-noc.svg);
   }
 }

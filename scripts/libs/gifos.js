@@ -66,14 +66,15 @@ class GifosCommons {
     document.documentElement.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
     this.currentTheme = "dark";
+
     this.navbarMenuThemeSwitch.innerHTML = "Modo Diurno";
     buttonCreateGif.classList.replace(
-      "navbar-buttons__create-gif--light-theme",
-      "navbar-buttons__create-gif--dark-theme"
+      "navbar-buttons__create-gif--light",
+      "navbar-buttons__create-gif--dark"
     );
     logoGifOS.classList.replace(
-      "navbar-logo__link--light-theme",
-      "navbar-logo__link--dark-theme"
+      "navbar-logo__link--light",
+      "navbar-logo__link--dark"
     );
   };
 
@@ -84,14 +85,15 @@ class GifosCommons {
     document.documentElement.setAttribute("data-theme", "light");
     localStorage.setItem("theme", "light");
     this.currentTheme = "light";
+
     this.navbarMenuThemeSwitch.innerHTML = "Modo Nocturno";
     buttonCreateGif.classList.replace(
-      "navbar-buttons__create-gif--dark-theme",
-      "navbar-buttons__create-gif--light-theme"
+      "navbar-buttons__create-gif--dark",
+      "navbar-buttons__create-gif--light"
     );
     logoGifOS.classList.replace(
-      "navbar-logo__link--dark-theme",
-      "navbar-logo__link--light-theme"
+      "navbar-logo__link--dark",
+      "navbar-logo__link--light"
     );
   };
 }

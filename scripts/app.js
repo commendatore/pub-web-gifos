@@ -28,15 +28,14 @@ const videoGifPlayback = document.getElementById("video-gif__playback");
 
 if (videoWebcamPlayback !== null) {
   const webcamRecord = new WebcamRecord(videoWebcamPlayback, 360, 240);
-
   const bttnRec = document.getElementById("rec");
   const bttnStop = document.getElementById("stop");
   const bttnUpload = document.getElementById("upload");
 
-  bttnRec.onclick = () => {
+  bttnRec.onclick = async () => {
     videoWebcamPlayback.style.display = "inline-block";
     videoGifPlayback.style.display = "none";
-    webcamRecord.getStreamAndRecord();
+    await webcamRecord.getStreamAndRecord();
   };
 
   bttnStop.onclick = () => {
@@ -57,7 +56,11 @@ if (videoWebcamPlayback !== null) {
   };
 }
 
-let path = window.location.pathname;
-let page = path.split("/").pop();
-let name = page.split(".").slice(0, -1).join(".");
-console.log(`current page: ${name}`);
+const getPage = () => {
+  let path = window.location.pathname;
+  let page = path.split("/").pop();
+  let name = page.split(".").slice(0, -1).join(".");
+  return name;
+};
+
+console.log(`current page: `, getPage());
