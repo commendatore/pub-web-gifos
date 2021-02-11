@@ -5,7 +5,7 @@ import { GifosCommons } from "./libs/gifos.js";
 import { GiphyAPI } from "./libs/giphy.js";
 import { WebcamRecord } from "./libs/webcam.js";
 
-const giphosCommons = new GifosCommons();
+const gifosCommons = new GifosCommons();
 const giphy = new GiphyAPI(credential);
 
 // giphy test

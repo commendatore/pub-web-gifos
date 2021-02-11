@@ -201,7 +201,7 @@ body {
   display: none;
 }
 
-.navbar-buttons__hamburguer {
+.navbar-buttons__hamburger {
   width: 0.938rem;
   height: 0.875rem;
   margin-right: 1.625rem;
@@ -287,7 +287,7 @@ body {
   .navbar-logo__link--dark {
     background-image: url(../../../assets/logo-desktop-noc.svg);
   }
-  .navbar-buttons__hamburguer {
+  .navbar-buttons__hamburger {
     display: none;
   }
 }

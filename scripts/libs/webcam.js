@@ -1,6 +1,6 @@
 class WebcamRecord {
-  constructor(playvideo, width, height) {
-    this.playvideo = playvideo;
+  constructor(playVideo, width, height) {
+    this.playVideo = playVideo;
     this.stream;
     this.recorder;
     this.gifData;
@@ -41,20 +41,20 @@ class WebcamRecord {
   };
 
   startRecording = () => {
-    this.playvideo.srcObject = this.stream;
-    this.playvideo.play();
+    this.playVideo.srcObject = this.stream;
+    this.playVideo.play();
     this.recorder = RecordRTC(this.stream, this.config);
     this.recorder.startRecording();
   };
 
   stopRecording = () => {
     this.recorder.stopRecording(this.saveGifData);
-    this.playvideo.srcObject = null;
+    this.playVideo.srcObject = null;
     this.recorder = null;
   };
 
-  startPlayback = (playgif) => {
-    playgif.src = URL.createObjectURL(this.gifData.get("file"));
+  startPlayback = (playGif) => {
+    playGif.src = URL.createObjectURL(this.gifData.get("file"));
   };
 }
 

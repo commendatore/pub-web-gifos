@@ -1,14 +1,11 @@
 class GifosCommons {
   constructor() {
-    // mobile hamburguer menu
+    // mobile hamburger menu
     this.navbarMenu = document.getElementById("navbar-menu");
-    this.navbarButtonsHamburguer = document.getElementById(
-      "navbar-buttons__hamburguer"
+    this.navbarButtonsHamburger = document.getElementById(
+      "navbar-buttons__hamburger"
     );
-    this.navbarButtonsHamburguer.addEventListener(
-      "click",
-      this.toggleHamburger
-    );
+    this.navbarButtonsHamburger.addEventListener("click", this.toggleHamburger);
 
     // theme switcher button
     this.lightMode = document.getElementById("theme-light");
@@ -33,18 +30,18 @@ class GifosCommons {
   toggleHamburger = () => {
     let isClosed = this.navbarMenu.classList.contains("navbar-menu--close");
     if (isClosed === true) {
-      this.navbarButtonsHamburguer.classList.replace(
-        "navbar-buttons__hamburguer-icon--open-menu",
-        "navbar-buttons__hamburguer-icon--close-menu"
+      this.navbarButtonsHamburger.classList.replace(
+        "navbar-buttons__hamburger-icon--open-menu",
+        "navbar-buttons__hamburger-icon--close-menu"
       );
       this.navbarMenu.classList.replace(
         "navbar-menu--close",
         "navbar-menu--show"
       );
     } else {
-      this.navbarButtonsHamburguer.classList.replace(
-        "navbar-buttons__hamburguer-icon--close-menu",
-        "navbar-buttons__hamburguer-icon--open-menu"
+      this.navbarButtonsHamburger.classList.replace(
+        "navbar-buttons__hamburger-icon--close-menu",
+        "navbar-buttons__hamburger-icon--open-menu"
       );
       this.navbarMenu.classList.replace(
         "navbar-menu--show",
