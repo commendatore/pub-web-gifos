@@ -1,6 +1,6 @@
 class GifosCommons {
   constructor() {
-    // navbar menu button
+    // mobile hamburguer menu
     this.navbarMenu = document.getElementById("navbar-menu");
     this.navbarButtonsHamburguer = document.getElementById(
       "navbar-buttons__hamburguer"
@@ -11,6 +11,9 @@ class GifosCommons {
     );
 
     // theme switcher button
+    this.lightMode = document.getElementById("theme-light");
+    this.nightMode = document.getElementById("theme-night");
+
     this.navbarMenuThemeSwitch = document.getElementById(
       "navbar-menu__theme-switch"
     );
@@ -19,9 +22,8 @@ class GifosCommons {
     // check current theme
     this.currentTheme = localStorage.getItem("theme");
     if (this.currentTheme) {
-      document.documentElement.setAttribute("data-theme", this.currentTheme);
       if (this.currentTheme === "dark") {
-        this.setDarkMode();
+        this.setNightMode();
       } else {
         this.setLightMode();
       }
@@ -32,8 +34,8 @@ class GifosCommons {
     let isClosed = this.navbarMenu.classList.contains("navbar-menu--close");
     if (isClosed === true) {
       this.navbarButtonsHamburguer.classList.replace(
-        "navbar-buttons__hamburguer--show",
-        "navbar-buttons__hamburguer--close"
+        "navbar-buttons__hamburguer-icon--open-menu",
+        "navbar-buttons__hamburguer-icon--close-menu"
       );
       this.navbarMenu.classList.replace(
         "navbar-menu--close",
@@ -41,8 +43,8 @@ class GifosCommons {
       );
     } else {
       this.navbarButtonsHamburguer.classList.replace(
-        "navbar-buttons__hamburguer--close",
-        "navbar-buttons__hamburguer--show"
+        "navbar-buttons__hamburguer-icon--close-menu",
+        "navbar-buttons__hamburguer-icon--open-menu"
       );
       this.navbarMenu.classList.replace(
         "navbar-menu--show",
@@ -55,46 +57,30 @@ class GifosCommons {
     if (this.currentTheme === "dark") {
       this.setLightMode();
     } else {
-      this.setDarkMode();
+      this.setNightMode();
     }
   };
 
-  setDarkMode = () => {
-    let buttonCreateGif = document.querySelector(".navbar-buttons__create-gif");
-    let logoGifOS = document.querySelector(".navbar-logo__link");
-
+  setNightMode = () => {
     document.documentElement.setAttribute("data-theme", "dark");
+    this.nightMode.media = "";
+    this.lightMode.media = "none";
+
     localStorage.setItem("theme", "dark");
     this.currentTheme = "dark";
 
     this.navbarMenuThemeSwitch.innerHTML = "Modo Diurno";
-    buttonCreateGif.classList.replace(
-      "navbar-buttons__create-gif--light",
-      "navbar-buttons__create-gif--dark"
-    );
-    logoGifOS.classList.replace(
-      "navbar-logo__link--light",
-      "navbar-logo__link--dark"
-    );
   };
 
   setLightMode = () => {
-    let buttonCreateGif = document.querySelector(".navbar-buttons__create-gif");
-    let logoGifOS = document.querySelector(".navbar-logo__link");
-
     document.documentElement.setAttribute("data-theme", "light");
+    this.lightMode.media = "";
+    this.nightMode.media = "none";
+
     localStorage.setItem("theme", "light");
     this.currentTheme = "light";
 
     this.navbarMenuThemeSwitch.innerHTML = "Modo Nocturno";
-    buttonCreateGif.classList.replace(
-      "navbar-buttons__create-gif--dark",
-      "navbar-buttons__create-gif--light"
-    );
-    logoGifOS.classList.replace(
-      "navbar-logo__link--dark",
-      "navbar-logo__link--light"
-    );
   };
 }
 

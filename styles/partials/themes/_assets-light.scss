@@ -13,12 +13,11 @@
 @media (min-width: 64rem) {
   .navbar-buttons__create-gif--icon {
     background-image: url(../../../assets/CTA-crear-gifo.svg);
-  }
-  .navbar-buttons__create-gif--icon:hover {
-    background-image: url(../../../assets/CTA-crear-gifo-hover.svg);
-  }
-  .navbar-buttons__create-gif--icon:active {
-    background-image: url(../../../assets/CTA-crear-gifo-active.svg);
+    &:hover {
+      background-image: url(../../../assets/CTA-crear-gifo-hover.svg);
+    }
+    &:active {
+      background-image: url(../../../assets/CTA-crear-gifo-active.svg);
+    }
   }
 }
-/*# sourceMappingURL=icons-light.css.map */

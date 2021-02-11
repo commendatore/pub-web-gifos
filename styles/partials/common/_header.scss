@@ -30,14 +30,6 @@
   background-position: center center;
 }
 
-.navbar-logo__link--light {
-  background-image: url(../../../assets/logo-mobile.svg);
-}
-
-.navbar-logo__link--dark {
-  background-image: url(../../../assets/logo-mobile-noc.svg);
-}
-
 .navbar-menu {
   position: absolute;
   width: 100vw;
@@ -108,14 +100,6 @@
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
-}
-
-.navbar-buttons__hamburguer--show {
-  background-image: url(../../../assets/burger.svg);
-}
-
-.navbar-buttons__hamburguer--close {
-  background-image: url(../../../assets/close.svg);
 }
 
 // 768px desktop design
@@ -210,25 +194,5 @@
     color: transparent;
     margin-right: 9.75rem;
     background-color: transparent;
-  }
-
-  .navbar-buttons__create-gif--light {
-    background-image: url(../../../assets/CTA-crear-gifo.svg);
-    &:hover {
-      background-image: url(../../../assets/CTA-crear-gifo-hover.svg);
-    }
-    &:active {
-      background-image: url(../../../assets/CTA-crear-gifo-active.svg);
-    }
-  }
-
-  .navbar-buttons__create-gif--dark {
-    background-image: url(../../../assets/CTA-crear-gifo-modo-noc.svg);
-    &:hover {
-      background-image: url(../../../assets/CTA-crear-gifo-hover-modo-noc.svg);
-    }
-    &:active {
-      background-image: url(../../../assets/CTA-crear-gifo-active-modo-noc.svg);
-    }
   }
 }
