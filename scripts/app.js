@@ -9,18 +9,21 @@ const gifosCommons = new GifosCommons();
 const giphy = new GiphyAPI(credential);
 
 // giphy test
-// let myQuery = {
-//   term: "argentina",
-//   limit: 12,
-//   offset: 0,
-// };
+let myQuery = {
+  term: "argentina",
+  limit: 12,
+  offset: 0,
+  rating: "r",
+};
 
 // let resultSearch = giphy.search(myQuery);
 // resultSearch.then((data) => console.log("giphy gifs: ", data));
-// let resultTrending = giphy.trending();
-// resultTrending.then((data) => console.log("giphy trending: ", data));
+// let resultTrending = giphy.trendingSearch();
+// resultTrending.then((data) => console.log("giphy trending search: ", data));
 // let resultSuggestions = giphy.suggestions(myQuery);
 // resultSuggestions.then((data) => console.log("giphy suggestions: ", data));
+let resultTrendingGifs = giphy.trendingGifs(myQuery);
+resultTrendingGifs.then((data) => console.log("giphy trending gifs: ", data));
 
 // webcam upload test
 const videoWebcamPlayback = document.getElementById("video-webcam__playback");

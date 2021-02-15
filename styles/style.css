@@ -22,11 +22,15 @@ button:focus {
   --header-bg-color: #fff;
   --header-border-top-color: #572ee5;
   --navbar-menu-bg-color-dec: 87, 46, 229;
+  --navbar-menu-bg-alpha-dec: 0.9;
   --navbar-menu-link-color: #fff;
   --navbar-menu-link-desktop-color: #572ee5;
   --navbar-menu-link-desktop-hover-color: #5ed7c6;
   --navbar-menu-link-desktop-active-color: #9cafc3;
   --navbar-menu-link-item-separator-color: #fff;
+  --trending-bg-color: #f3f5f8;
+  --trending-title-color: #572ee5;
+  --trending-description-color: #000;
   --footer-bg-color: #fff;
   --footer-border-bottom-color: #572ee5;
   --footer-icons-link-color: #cdd6e0;
@@ -40,11 +44,15 @@ button:focus {
   --header-bg-color: #37383c;
   --header-border-top-color: #000000;
   --navbar-menu-bg-color-dec: 0, 0, 0;
+  --navbar-menu-bg-alpha-dec: 1;
   --navbar-menu-link-color: #fff;
   --navbar-menu-link-desktop-color: #fff;
   --navbar-menu-link-desktop-hover-color: #5ed7c6;
   --navbar-menu-link-desktop-active-color: #9cafc3;
   --navbar-menu-link-item-separator-color: #fff;
+  --trending-bg-color: #222326;
+  --trending-title-color: #fff;
+  --trending-description-color: #fff;
   --footer-bg-color: #37383c;
   --footer-border-bottom-color: #000000;
   --footer-icons-link-color: #cdd6e0;
@@ -54,15 +62,18 @@ button:focus {
 }
 
 body {
-  font-family: "Roboto", sans-serif, "Montserrat", sans-serif;
-  background-color: var(--bg-color);
-  color: var(--font-color);
+  display: none;
 }
 
-/*
-  limit screen max width to 1440px = 90rem
-  and center the container in the viewport
-*/
+@media (min-width: 20rem) {
+  body {
+    display: block;
+    font-family: "Roboto", sans-serif, "Montserrat", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+  }
+}
+
 @media (min-width: 90rem) {
   header,
   main,
@@ -131,7 +142,7 @@ body {
   height: 100vh;
   max-width: 64rem;
   padding-top: 2rem;
-  background-color: rgba(var(--navbar-menu-bg-color-dec), 0.9);
+  background-color: rgba(var(--navbar-menu-bg-color-dec), var(--navbar-menu-bg-alpha-dec));
 }
 
 .navbar-menu--show {
@@ -480,11 +491,129 @@ body {
 
 .trending {
   height: 26.875rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  background-color: var(--trending-bg-color);
+}
+
+.trending-title {
+  color: var(--trending-title-color);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  padding: 2.875rem 1.375rem 0 1.375rem;
+}
+
+.trending-description {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--trending-description-color);
+  width: 100%;
+  padding: 0.438rem 1.375rem 0 1.375rem;
+}
+
+.trending-description > span {
+  display: block;
+}
+
+.carousel {
+  width: 100%;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.carousel-trending {
+  width: 100%;
+  padding: 2rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Hide scrollbar */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.carousel-trending :first-child {
+  margin-left: 0;
+}
+
+/* Hide scrollbar */
+.carousel-trending::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-trending__slide {
+  height: 11.75rem;
+  width: 15.25rem;
+  margin-left: 1.375rem;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  background-color: grey;
+}
+
+.carousel-trending__button {
+  display: none;
 }
 
 @media (min-width: 48rem) {
   .trending {
     height: 40rem;
+  }
+  .trending-title {
+    font-size: 1.563rem;
+    padding-top: 4.188rem;
+  }
+  .trending-description {
+    font-size: 1.125rem;
+    padding-top: 0.75rem;
+  }
+  .trending-description > span {
+    display: inline;
+  }
+  .carousel-trending {
+    width: 100%;
+    padding: 3.313rem 0;
+    -ms-scroll-snap-type: x mandatory;
+        scroll-snap-type: x mandatory;
+  }
+  .carousel-trending__slide {
+    width: 22.313rem;
+    height: 17.188rem;
+    scroll-snap-align: start;
+  }
+  .carousel-trending__button {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: block;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    border: none;
+    color: transparent;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
   }
 }
 

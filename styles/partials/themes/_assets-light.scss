@@ -10,6 +10,26 @@
   background-image: url(../../../assets/close.svg);
 }
 
+@media (min-width: 48rem) {
+  .carousel-trending__button-left {
+    margin-left: 5.875rem;
+    margin-right: 1.375rem;
+    background-image: url(../../../assets/button-slider-left.svg);
+    &:hover {
+      background-image: url(../../../assets/button-slider-left-hover.svg);
+    }
+  }
+
+  .carousel-trending__button-right {
+    margin-right: 5.875rem;
+    margin-left: 1.375rem;
+    background-image: url(../../../assets/Button-Slider-right.svg);
+    &:hover {
+      background-image: url(../../../assets/Button-Slider-right-hover.svg);
+    }
+  }
+}
+
 @media (min-width: 64rem) {
   .navbar-buttons__create-gif--icon {
     background-image: url(../../../assets/CTA-crear-gifo.svg);

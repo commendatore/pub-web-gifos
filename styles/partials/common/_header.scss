@@ -36,7 +36,10 @@
   height: 100vh;
   max-width: 64rem;
   padding-top: 2rem;
-  background-color: rgba(var(--navbar-menu-bg-color-dec), 0.9);
+  background-color: rgba(
+    var(--navbar-menu-bg-color-dec),
+    var(--navbar-menu-bg-alpha-dec)
+  );
 }
 
 // FIXME: HIDE OVERFLOW ON HEADER

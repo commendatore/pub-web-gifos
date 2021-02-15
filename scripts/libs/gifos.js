@@ -81,4 +81,6 @@ class GifosCommons {
   };
 }
 
-export { GifosCommons };
+class GifosSlide {}
+
+export { GifosCommons, GifosSlide };

@@ -1,10 +1,116 @@
 .trending {
   height: 26.875rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--trending-bg-color);
+}
+
+.trending-title {
+  color: var(--trending-title-color);
+  font-family: $secondary-font;
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  padding: 2.875rem 1.375rem 0 1.375rem;
+}
+
+.trending-description {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--trending-description-color);
+  width: 100%;
+  padding: 0.438rem 1.375rem 0 1.375rem;
+}
+
+.trending-description > span {
+  display: block;
+}
+
+.carousel {
+  width: 100%;
+  align-self: flex-start;
+  display: flex;
+}
+
+.carousel-trending {
+  width: 100%;
+  padding: 2rem 0;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  :first-child {
+    margin-left: 0;
+  }
+
+  /* Hide scrollbar */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar */
+.carousel-trending::-webkit-scrollbar {
+  display: none; // Chrome, Safari and Opera
+}
+
+.carousel-trending__slide {
+  height: 11.75rem;
+  width: 15.25rem;
+  margin-left: 1.375rem;
+  flex-shrink: 0;
+  background-color: grey;
+}
+
+.carousel-trending__button {
+  display: none;
 }
 
 // 768px design desktop
 @media (min-width: 48rem) {
   .trending {
     height: 40rem;
+  }
+
+  .trending-title {
+    font-size: 1.563rem;
+    padding-top: 4.188rem;
+  }
+
+  .trending-description {
+    font-size: 1.125rem;
+    padding-top: 0.75rem;
+  }
+  .trending-description > span {
+    display: inline;
+  }
+
+  .carousel-trending {
+    width: 100%;
+    padding: 3.313rem 0;
+    scroll-snap-type: x mandatory;
+  }
+
+  .carousel-trending__slide {
+    width: 22.313rem;
+    height: 17.188rem;
+    scroll-snap-align: start;
+  }
+
+  .carousel-trending__button {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: block;
+    align-self: center;
+    border: none;
+    color: transparent;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
   }
 }

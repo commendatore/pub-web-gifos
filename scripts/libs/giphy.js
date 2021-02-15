@@ -8,7 +8,12 @@ class GiphyAPI {
 
   search = async (query) => {
     const path = `/gifs/search`;
-    const params = `?${this.apiKey}&q=${query.term}&limit=${query.limit}&offset=${query.offset}`;
+    const params = `?${this.apiKey}
+&q=${query.term}
+&limit=${query.limit}
+&offset=${query.offset}
+&rating=&${query.rating}`;
+
     const endpoint = this.urlAPI + path + params;
 
     const res = await fetch(endpoint);
@@ -24,6 +29,18 @@ class GiphyAPI {
 
   suggestions = async (query) => {
     const path = `/tags/related/${query.term}`;
+    const params = `?${this.apiKey}
+&limit${query.limit}`;
+
+    const endpoint = this.urlAPI + path + params;
+
+    const res = await fetch(endpoint);
+    const json = await res.json();
+    return json.data;
+  };
+
+  trendingSearch = async () => {
+    const path = `/trending/searches`;
     const params = `?${this.apiKey}`;
     const endpoint = this.urlAPI + path + params;
 
@@ -32,14 +49,24 @@ class GiphyAPI {
     return json.data;
   };
 
-  trending = async () => {
-    const path = `/trending/searches`;
-    const params = `?${this.apiKey}`;
+  trendingGifs = async (query) => {
+    const path = `/gifs/trending`;
+    const params = `?${this.apiKey}
+&limit=${query.limit}
+&offset=${query.offset}
+&rating=&${query.rating}`;
+
     const endpoint = this.urlAPI + path + params;
 
     const res = await fetch(endpoint);
     const json = await res.json();
-    return json.data;
+    return json.data.map((arr) => {
+      return {
+        url: arr.images.original.url,
+        title: arr.title,
+        username: arr.username,
+      };
+    });
   };
 
   upload = async (gifData) => {
