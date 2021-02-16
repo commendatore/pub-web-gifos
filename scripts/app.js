@@ -1,35 +1,42 @@
 // giphy credentials
 import credential from "./config/giphyKey.js";
 
-import { GifosCommons } from "./libs/gifos.js";
-import { GiphyAPI } from "./libs/giphy.js";
+import { GifosCommons, GifosSlides } from "./libs/gifos.js";
 import { WebcamRecord } from "./libs/webcam.js";
+import { GiphyAPI } from "./libs/giphy.js";
 
-const gifosCommons = new GifosCommons();
 const giphy = new GiphyAPI(credential);
 
-// giphy test
-let myQuery = {
-  term: "argentina",
-  limit: 12,
-  offset: 0,
-  rating: "r",
-};
+const gifosSlides = new GifosSlides();
+const gifosCommons = new GifosCommons(
+  "hamburger-bttn",
+  "hamburger-menu",
+  "switch-bttn"
+);
 
-// let resultSearch = giphy.search(myQuery);
-// resultSearch.then((data) => console.log("giphy gifs: ", data));
-// let resultTrending = giphy.trendingSearch();
-// resultTrending.then((data) => console.log("giphy trending search: ", data));
-// let resultSuggestions = giphy.suggestions(myQuery);
-// resultSuggestions.then((data) => console.log("giphy suggestions: ", data));
-let resultTrendingGifs = giphy.trendingGifs(myQuery);
-resultTrendingGifs.then((data) => console.log("giphy trending gifs: ", data));
+if (gifosCommons.isNightMode()) {
+  gifosCommons.setNightMode();
+} else {
+  gifosCommons.setLightMode();
+}
+
+if (gifosCommons.getPage() !== "create") {
+  giphy.trendingGifs({ rating: "r" }).then((giphyData) => {
+    gifosSlides.setSlider(
+      giphyData,
+      "trending-gifos",
+      "carousel-trending__slide",
+      "slider-backward-bttn",
+      "slider-forward-bttn"
+    );
+  });
+}
 
 // webcam upload test
-const videoWebcamPlayback = document.getElementById("video-webcam__playback");
-const videoGifPlayback = document.getElementById("video-gif__playback");
+if (gifosCommons.getPage() === "create") {
+  const videoWebcamPlayback = document.getElementById("video-webcam__playback");
+  const videoGifPlayback = document.getElementById("video-gif__playback");
 
-if (videoWebcamPlayback !== null) {
   const webcamRecord = new WebcamRecord(videoWebcamPlayback, 360, 240);
   const bttnRec = document.getElementById("rec");
   const bttnStop = document.getElementById("stop");
@@ -59,11 +66,19 @@ if (videoWebcamPlayback !== null) {
   };
 }
 
-const getPage = () => {
-  let path = window.location.pathname;
-  let page = path.split("/").pop();
-  let name = page.split(".").slice(0, -1).join(".");
-  return name;
-};
+// giphy tests;
+// let myQuery = {
+//   term: "argentina",
+//   limit: 22,
+//   offset: 0,
+//   rating: "r",
+// };
 
-console.log(`current page: `, getPage());
+// giphy.search(myQuery).then((data) => console.log("giphy gifs: ", data));
+// giphy
+//   .trendingSearch()
+//   .then((data) => console.log("giphy trending search: ", data));
+// giphy
+//   .suggestions(myQuery)
+//   .then((data) => console.log("giphy suggestions: ", data));
+// giphy.getGif("bstZCRuT1nucE").then((data) => console.log("giphy id:", data));

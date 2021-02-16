@@ -8,11 +8,12 @@ class GiphyAPI {
 
   search = async (query) => {
     const path = `/gifs/search`;
-    const params = `?${this.apiKey}
+    const params = `
+?${this.apiKey}
 &q=${query.term}
 &limit=${query.limit}
 &offset=${query.offset}
-&rating=&${query.rating}`;
+&rating=${query.rating}`;
 
     const endpoint = this.urlAPI + path + params;
 
@@ -20,6 +21,7 @@ class GiphyAPI {
     const json = await res.json();
     return json.data.map((arr) => {
       return {
+        id: arr.id,
         url: arr.images.original.url,
         title: arr.title,
         username: arr.username,
@@ -29,7 +31,8 @@ class GiphyAPI {
 
   suggestions = async (query) => {
     const path = `/tags/related/${query.term}`;
-    const params = `?${this.apiKey}
+    const params = `
+?${this.apiKey}
 &limit${query.limit}`;
 
     const endpoint = this.urlAPI + path + params;
@@ -51,10 +54,11 @@ class GiphyAPI {
 
   trendingGifs = async (query) => {
     const path = `/gifs/trending`;
-    const params = `?${this.apiKey}
+    const params = `
+?${this.apiKey}
 &limit=${query.limit}
 &offset=${query.offset}
-&rating=&${query.rating}`;
+&rating=${query.rating}`;
 
     const endpoint = this.urlAPI + path + params;
 
@@ -62,6 +66,7 @@ class GiphyAPI {
     const json = await res.json();
     return json.data.map((arr) => {
       return {
+        id: arr.id,
         url: arr.images.original.url,
         title: arr.title,
         username: arr.username,
@@ -71,7 +76,9 @@ class GiphyAPI {
 
   upload = async (gifData) => {
     const path = `/gifs`;
-    const params = `?${this.apiKey}&${this.username}`;
+    const params = `
+?${this.apiKey}
+&${this.username}`;
     const endpoint = this.urlUpload + path + params;
     const options = {
       method: "POST",
@@ -100,7 +107,12 @@ class GiphyAPI {
 
     const res = await fetch(endpoint);
     const json = await res.json();
-    return json.data.images.original.url;
+    return {
+      id: json.data.id,
+      url: json.data.images.original.url,
+      title: json.data.title,
+      username: json.data.username,
+    };
   };
 }
 

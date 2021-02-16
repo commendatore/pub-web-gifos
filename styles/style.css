@@ -69,8 +69,6 @@ body {
   body {
     display: block;
     font-family: "Roboto", sans-serif, "Montserrat", sans-serif;
-    background-color: var(--bg-color);
-    color: var(--font-color);
   }
 }
 
@@ -87,7 +85,6 @@ body {
 .main {
   padding-top: 6.25rem;
   width: 100vw;
-  min-height: 100vh;
   background-color: var(--main-bg-color);
 }
 
@@ -538,6 +535,7 @@ body {
 
 .carousel-trending {
   width: 100%;
+  min-height: 15.75rem;
   padding: 2rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -547,27 +545,29 @@ body {
   -webkit-overflow-scrolling: touch;
   /* Hide scrollbar */
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
-.carousel-trending :first-child {
-  margin-left: 0;
+.carousel-trending :last-child {
+  margin-right: 1.375rem;
 }
 
-/* Hide scrollbar */
 .carousel-trending::-webkit-scrollbar {
   display: none;
 }
 
 .carousel-trending__slide {
-  height: 11.75rem;
   width: 15.25rem;
+  height: 11.75rem;
   margin-left: 1.375rem;
   -ms-flex-negative: 0;
       flex-shrink: 0;
   background-color: grey;
+}
+
+.carousel-trending__slide > img {
+  width: 100%;
+  height: 100%;
 }
 
 .carousel-trending__button {
@@ -591,9 +591,13 @@ body {
   }
   .carousel-trending {
     width: 100%;
+    min-height: 23.814rem;
     padding: 3.313rem 0;
     -ms-scroll-snap-type: x mandatory;
         scroll-snap-type: x mandatory;
+  }
+  .carousel-trending :first-child {
+    margin-left: 0;
   }
   .carousel-trending__slide {
     width: 22.313rem;
@@ -601,7 +605,7 @@ body {
     scroll-snap-align: start;
   }
   .carousel-trending__button {
-    width: 2.5rem;
+    width: 4rem;
     height: 2.5rem;
     display: block;
     -ms-flex-item-align: center;

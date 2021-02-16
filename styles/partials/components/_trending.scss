@@ -37,32 +37,36 @@
 
 .carousel-trending {
   width: 100%;
+  min-height: 15.75rem;
   padding: 2rem 0;
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 
-  :first-child {
-    margin-left: 0;
+  :last-child {
+    margin-right: 1.375rem;
   }
 
   /* Hide scrollbar */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-/* Hide scrollbar */
-.carousel-trending::-webkit-scrollbar {
-  display: none; // Chrome, Safari and Opera
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari and Opera
+  }
 }
 
 .carousel-trending__slide {
-  height: 11.75rem;
   width: 15.25rem;
+  height: 11.75rem;
   margin-left: 1.375rem;
   flex-shrink: 0;
   background-color: grey;
+}
+
+.carousel-trending__slide > img {
+  width: 100%;
+  height: 100%;
 }
 
 .carousel-trending__button {
@@ -90,8 +94,13 @@
 
   .carousel-trending {
     width: 100%;
+    min-height: 23.814rem;
     padding: 3.313rem 0;
     scroll-snap-type: x mandatory;
+
+    :first-child {
+      margin-left: 0;
+    }
   }
 
   .carousel-trending__slide {
@@ -101,7 +110,7 @@
   }
 
   .carousel-trending__button {
-    width: 2.5rem;
+    width: 4rem;
     height: 2.5rem;
     display: block;
     align-self: center;

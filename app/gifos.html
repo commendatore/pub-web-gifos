@@ -3,23 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
     <link
       rel="stylesheet"
-      href="../styles/icons-light.css"
+      href="/styles/icons-light.css"
       media=""
       id="theme-light"
     />
     <link
       rel="stylesheet"
-      href="../styles/icons-dark.css"
+      href="/styles/icons-dark.css"
       media=""
       id="theme-night"
     />
     <link
       rel="icon"
       sizes="32x32"
-      href="../assets/logo-mobile-noc.svg"
+      href="/assets/logo-mobile-noc.svg"
       type="image/svg+xml"
     />
     <script
@@ -35,22 +35,19 @@
         <div class="navbar-logo">
           <a
             class="navbar-logo__link navbar-logo__link--icon"
-            href="../index.html"
+            href="/index.html"
           ></a>
         </div>
-        <div class="navbar-menu navbar-menu--close" id="navbar-menu">
+        <div class="navbar-menu navbar-menu--close" id="hamburger-menu">
           <ul class="navbar-menu__list">
             <li class="navbar-menu__item">
-              <a
-                class="navbar-menu__link"
-                href="#theme-switch"
-                id="navbar-menu__theme-switch"
+              <a class="navbar-menu__link" href="#theme-switch" id="switch-bttn"
                 >Modo Nocturno</a
               >
               <span class="navbar-menu__item-separator"></span>
             </li>
             <li class="navbar-menu__item">
-              <a class="navbar-menu__link" href="./favs.html">Favoritos</a>
+              <a class="navbar-menu__link" href="/app/favs.html">Favoritos</a>
               <span class="navbar-menu__item-separator"></span>
             </li>
             <li class="navbar-menu__item">
@@ -62,12 +59,12 @@
         <div class="navbar-buttons">
           <a
             class="navbar-buttons__create-gif navbar-buttons__create-gif--icon"
-            href="./create.html"
+            href="/app/create.html"
           >
           </a>
           <input
             class="navbar-buttons__hamburger navbar-buttons__hamburger-icon--open-menu"
-            id="navbar-buttons__hamburger"
+            id="hamburger-bttn"
             type="button"
             value="hamburger"
           />
@@ -84,23 +81,12 @@
         <div class="carousel">
           <button
             class="carousel-trending__button carousel-trending__button-left"
+            id="slider-backward-bttn"
           ></button>
-          <div class="carousel-trending">
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-            <div class="carousel-trending__slide"></div>
-          </div>
+          <div class="carousel-trending" id="trending-gifos"></div>
           <button
             class="carousel-trending__button carousel-trending__button-right"
+            id="slider-forward-bttn"
           ></button>
         </div>
       </div>
