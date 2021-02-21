@@ -82,7 +82,29 @@
           />
         </div>
         <div class="search">
-          <input class="search-box" type="search" name="" id="" />
+          <form class="search-form" autocomplete="off">
+            <input
+              class="search-bttn search-bttn--submit"
+              type="submit"
+              value="search-bttn"
+            />
+            <input class="search-box" type="search" name="search"
+            id="search-term" placeholder="Busca GIFOS y más" required
+            pattern=".*\S.*"/ />
+            <input
+              class="search-bttn search-bttn--focus"
+              type="reset "
+              value="clear"
+              id="search-clear-bttn"
+            />
+          </form>
+          <ul class="search-suggestions">
+            <li><a href="">foo 1</a></li>
+            <li><a href="">foo 2</a></li>
+            <li><a href="">foo 3</a></li>
+            <li><a href="">foo 4</a></li>
+            <li><a href="">foo 5</a></li>
+          </ul>
         </div>
         <div class="trending-terms">
           <h2 class="trending-terms__title">Trending:</h2>

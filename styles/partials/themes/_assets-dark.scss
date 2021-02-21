@@ -10,10 +10,20 @@
   background-image: url(../../../assets/close-modo-noct.svg);
 }
 
+.search-bttn--submit {
+  background-image: url(../../../assets/icon-search-submit.svg);
+}
+
+.search-bttn--focus {
+  background-image: url(../../../assets/icon-search-modo-noct.svg);
+}
+
+.search-bttn--clear {
+  background-image: url(../../../assets/close-modo-noct.svg);
+}
+
 @media (min-width: 48rem) {
   .carousel-trending__button-left {
-    margin-left: 5.875rem;
-    margin-right: 1.375rem;
     background-image: url(../../../assets/button-slider-left-md-noct.svg);
     &:hover {
       background-image: url(../../../assets/button-slider-left-hover-md-noct.svg);
@@ -21,8 +31,6 @@
   }
 
   .carousel-trending__button-right {
-    margin-right: 5.875rem;
-    margin-left: 1.375rem;
     background-image: url(../../../assets/button-slider-right-md-noct.svg);
     &:hover {
       background-image: url(../../../assets/Button-Slider-right-hover-md-noct.svg);
