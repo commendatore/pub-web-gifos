@@ -1,13 +1,11 @@
-// giphy credentials
 import credential from "./config/giphyKey.js";
 
-import { GifosCommons, GifosSlides } from "./libs/gifos.js";
+import { GifosCommons, GifosSlides, GifosSearch } from "./libs/gifos.js";
 import { WebcamRecord } from "./libs/webcam.js";
 import { GiphyAPI } from "./libs/giphy.js";
 
 const giphy = new GiphyAPI(credential);
 
-const gifosSlides = new GifosSlides();
 const gifosCommons = new GifosCommons(
   "hamburger-bttn",
   "hamburger-menu",
@@ -20,16 +18,26 @@ if (gifosCommons.isNightMode()) {
   gifosCommons.setLightMode();
 }
 
+const gifosSlides = new GifosSlides();
 if (gifosCommons.getPage() !== "create") {
-  giphy.trendingGifs({ rating: "r" }).then((giphyData) => {
-    gifosSlides.setSlider(
-      giphyData,
-      "trending-gifos",
-      "carousel-trending__slide",
-      "slider-backward-bttn",
-      "slider-forward-bttn"
-    );
-  });
+  gifosSlides.setSlider(
+    "trending-gifos",
+    "carousel-trending__slide",
+    "slider-backward-bttn",
+    "slider-forward-bttn",
+    giphy.trendingGifs
+  );
+}
+
+const gifosSearchBox = new GifosSearch();
+if (gifosCommons.getPage() === "index") {
+  gifosSearchBox.setSearchBox(
+    "search-box",
+    "suggestions-box",
+    "submit-bttn",
+    "clear-bttn",
+    giphy.suggestions
+  );
 }
 
 // webcam upload test
@@ -69,7 +77,7 @@ if (gifosCommons.getPage() === "create") {
 // giphy tests;
 // let myQuery = {
 //   term: "argentina",
-//   limit: 22,
+//   limit: 12,
 //   offset: 0,
 //   rating: "r",
 // };

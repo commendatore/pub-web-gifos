@@ -33,7 +33,7 @@ class GiphyAPI {
     const path = `/tags/related/${query.term}`;
     const params = `
 ?${this.apiKey}
-&limit${query.limit}`;
+&limit=${query.limit}`;
 
     const endpoint = this.urlAPI + path + params;
 

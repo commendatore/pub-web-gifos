@@ -84,6 +84,7 @@ class GifosCommons {
 
   getPage = () => {
     let path = window.location.pathname;
+    if (path === "/") return "index";
     let page = path.split("/").pop();
     let name = page.split(".").slice(0, -1).join(".");
     return name;
@@ -95,7 +96,8 @@ class GifosSlides {
     this.trendingSlider = undefined;
     this.backwardBttn = undefined;
     this.forwardBttn = undefined;
-    this.trendingLength = 0;
+    this.apiTrending = undefined;
+    this.trendingSliderLength = 0;
   }
 
   appendSlides = (giphyArr, classType) => {
@@ -119,33 +121,140 @@ class GifosSlides {
   };
 
   forwardSlider = () => {
-    let step = this.trendingSlider.scrollWidth / this.trendingLength;
+    let step = this.trendingSlider.scrollWidth / this.trendingSliderLength;
     this.trendingSlider.scrollLeft += step;
   };
 
   backwardSlider = () => {
-    let step = this.trendingSlider.scrollWidth / this.trendingLength;
+    let step = this.trendingSlider.scrollWidth / this.trendingSliderLength;
     this.trendingSlider.scrollLeft -= step;
   };
 
-  setSlider = (
-    giphyArr,
+  setSlider = async (
     htmlContainerId,
     classType,
     backwardBttnId,
-    forwardBttnId
+    forwardBttnId,
+    trendingGifsCallback
   ) => {
     this.trendingSlider = document.getElementById(htmlContainerId);
     this.backwardBttn = document.getElementById(backwardBttnId);
     this.forwardBttn = document.getElementById(forwardBttnId);
+    this.apiTrending = trendingGifsCallback;
 
     this.backwardBttn.addEventListener("click", this.backwardSlider);
     this.forwardBttn.addEventListener("click", this.forwardSlider);
 
+    let giphyArr = await this.apiTrending({ rating: "r" });
     let gifosSlides = this.appendSlides(giphyArr, classType);
     this.trendingSlider.innerHTML = gifosSlides.content;
-    this.trendingLength = gifosSlides.length;
+    this.trendingSliderLength = gifosSlides.length;
   };
 }
 
-export { GifosCommons, GifosSlides };
+class GifosSearch {
+  constructor() {
+    this.searchBox = undefined;
+    this.suggestionsBox = undefined;
+    this.submitBttn = undefined;
+    this.clearBttn = undefined;
+    this.apiSuggestions = undefined;
+  }
+
+  setSearchBox = (
+    searchBoxId,
+    suggestionsBoxId,
+    submitBttnId,
+    clearBttnId,
+    suggestionsCallback
+  ) => {
+    this.searchBox = document.getElementById(searchBoxId);
+    this.suggestionsBox = document.getElementById(suggestionsBoxId);
+    this.submitBttn = document.getElementById(submitBttnId);
+    this.clearBttn = document.getElementById(clearBttnId);
+    this.apiSuggestions = suggestionsCallback;
+
+    this.clearBttn.addEventListener("click", this.focusSearchBox);
+    this.submitBttn.addEventListener("click", this.searchGifos);
+    this.searchBox.addEventListener("input", this.validateSearch);
+  };
+
+  focusSearchBox = () => {
+    this.searchBox.value = "";
+    this.searchBox.focus();
+    this.validateSearch();
+  };
+
+  closeSuggestions = () => {
+    this.submitBttn.classList.replace(
+      "search-bttn__submit--show",
+      "search-bttn__submit--hide"
+    );
+    if (this.searchBox.value === "") {
+      this.clearBttn.classList.replace(
+        "search-bttn__clear",
+        "search-bttn__focus"
+      );
+    }
+    this.suggestionsBox.classList.replace(
+      "search-suggestions--show",
+      "search-suggestions--hide"
+    );
+  };
+
+  validateSearch = async () => {
+    if (this.searchBox.validity.valid) {
+      let content = await this.autocomplete();
+
+      if (content) {
+        this.submitBttn.classList.replace(
+          "search-bttn__submit--hide",
+          "search-bttn__submit--show"
+        );
+        this.clearBttn.classList.replace(
+          "search-bttn__focus",
+          "search-bttn__clear"
+        );
+
+        this.suggestionsBox.classList.replace(
+          "search-suggestions--hide",
+          "search-suggestions--show"
+        );
+
+        this.suggestionsBox.innerHTML = content;
+        let terms = this.suggestionsBox.querySelectorAll("a");
+        terms.forEach((term) => {
+          term.addEventListener("click", (event) => {
+            this.searchBox.value = event.target.innerHTML;
+            this.searchGifos();
+          });
+        });
+      } else {
+        this.closeSuggestions();
+      }
+    } else {
+      this.closeSuggestions();
+    }
+  };
+
+  autocomplete = async () => {
+    let suggestions = [];
+
+    let giphyArr = await this.apiSuggestions({ term: this.searchBox.value });
+    if (!giphyArr.length) return false;
+
+    giphyArr.forEach((term) => {
+      let suggestion = `<li><a href="#">${term.name}</a></li>`;
+      suggestions.push(suggestion);
+    });
+
+    return suggestions.join("\n");
+  };
+
+  searchGifos = () => {
+    this.closeSuggestions();
+    console.log("search gifo: " + this.searchBox.value);
+  };
+}
+
+export { GifosCommons, GifosSlides, GifosSearch };

@@ -544,12 +544,26 @@ body {
   width: 1.938rem;
 }
 
-.search-bttn--submit {
+.search-bttn__submit {
   background-position: left center;
   margin-right: 0.688rem;
 }
 
-.search-bttn--focus {
+.search-bttn__submit--hide {
+  visibility: hidden;
+}
+
+.search-bttn__submit--show {
+  visibility: visible;
+}
+
+.search-bttn__focus {
+  background-position: right center;
+  margin-left: 0.688rem;
+}
+
+.search-bttn__clear {
+  background-size: 0.875rem 0.875rem;
   background-position: right center;
   margin-left: 0.688rem;
 }
@@ -559,6 +573,14 @@ body {
   list-style: none;
   padding: 0.938rem 0;
   width: 100%;
+}
+
+.search-suggestions--hide {
+  display: none;
+}
+
+.search-suggestions--show {
+  display: block;
 }
 
 .search-suggestions > li {
