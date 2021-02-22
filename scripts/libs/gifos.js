@@ -158,25 +158,35 @@ class GifosSearch {
     this.suggestionsBox = undefined;
     this.submitBttn = undefined;
     this.clearBttn = undefined;
+    this.trendingTerms = undefined;
     this.apiSuggestions = undefined;
+    this.apiTrendingTerms = undefined;
   }
 
-  setSearchBox = (
+  setSearchBox = async (
     searchBoxId,
     suggestionsBoxId,
     submitBttnId,
     clearBttnId,
-    suggestionsCallback
+    trendingTermsId,
+    suggestionsCallback,
+    trendingTermsCallback
   ) => {
     this.searchBox = document.getElementById(searchBoxId);
     this.suggestionsBox = document.getElementById(suggestionsBoxId);
     this.submitBttn = document.getElementById(submitBttnId);
     this.clearBttn = document.getElementById(clearBttnId);
+    this.trendingTerms = document.getElementById(trendingTermsId);
     this.apiSuggestions = suggestionsCallback;
+    this.apiTrendingTerms = trendingTermsCallback;
 
     this.clearBttn.addEventListener("click", this.focusSearchBox);
     this.submitBttn.addEventListener("click", this.searchGifos);
     this.searchBox.addEventListener("input", this.validateSearch);
+
+    let content = await this.trendingSearch();
+    this.trendingTerms.innerHTML = content;
+    this.linkTermSearch(this.trendingTerms);
   };
 
   focusSearchBox = () => {
@@ -195,6 +205,11 @@ class GifosSearch {
         "search-bttn__clear",
         "search-bttn__focus"
       );
+    } else {
+      this.clearBttn.classList.replace(
+        "search-bttn__focus",
+        "search-bttn__clear"
+      );
     }
     this.suggestionsBox.classList.replace(
       "search-suggestions--show",
@@ -202,33 +217,40 @@ class GifosSearch {
     );
   };
 
+  openSuggestions = () => {
+    this.submitBttn.classList.replace(
+      "search-bttn__submit--hide",
+      "search-bttn__submit--show"
+    );
+    this.clearBttn.classList.replace(
+      "search-bttn__focus",
+      "search-bttn__clear"
+    );
+
+    this.suggestionsBox.classList.replace(
+      "search-suggestions--hide",
+      "search-suggestions--show"
+    );
+  };
+
+  linkTermSearch = (contentBox) => {
+    let terms = contentBox.querySelectorAll("a");
+    terms.forEach((term) => {
+      term.addEventListener("click", (event) => {
+        this.searchBox.value = event.target.innerHTML;
+        this.searchGifos();
+      });
+    });
+  };
+
   validateSearch = async () => {
     if (this.searchBox.validity.valid) {
       let content = await this.autocomplete();
 
       if (content) {
-        this.submitBttn.classList.replace(
-          "search-bttn__submit--hide",
-          "search-bttn__submit--show"
-        );
-        this.clearBttn.classList.replace(
-          "search-bttn__focus",
-          "search-bttn__clear"
-        );
-
-        this.suggestionsBox.classList.replace(
-          "search-suggestions--hide",
-          "search-suggestions--show"
-        );
-
         this.suggestionsBox.innerHTML = content;
-        let terms = this.suggestionsBox.querySelectorAll("a");
-        terms.forEach((term) => {
-          term.addEventListener("click", (event) => {
-            this.searchBox.value = event.target.innerHTML;
-            this.searchGifos();
-          });
-        });
+        this.linkTermSearch(this.suggestionsBox);
+        this.openSuggestions();
       } else {
         this.closeSuggestions();
       }
@@ -249,6 +271,20 @@ class GifosSearch {
     });
 
     return suggestions.join("\n");
+  };
+
+  trendingSearch = async () => {
+    let terms = [];
+    let limit = 5;
+    let giphyArr = await this.apiTrendingTerms();
+
+    giphyArr.some((tag, i) => {
+      if (limit && i === limit) return terms.join("\n");
+      let term = `<li><a href="#">${tag}</a></li>`;
+      terms.push(term);
+    });
+
+    return terms.join("\n");
   };
 
   searchGifos = () => {

@@ -160,7 +160,6 @@
 }
 
 .trending-terms__list {
-  color: var(--trending-terms-list-font-color);
   font-family: $secondary-font;
   font-size: 0.875rem;
   font-weight: 500;
@@ -172,12 +171,18 @@
 
 .trending-terms__list > {
   li {
+    color: var(--trending-terms-list-font-color);
     display: inline;
     &::after {
       content: ",";
     }
     &:last-child::after {
       content: "";
+    }
+
+    a {
+      color: var(--trending-terms-list-font-color);
+      text-decoration: none;
     }
   }
 }

@@ -36,7 +36,9 @@ if (gifosCommons.getPage() === "index") {
     "suggestions-box",
     "submit-bttn",
     "clear-bttn",
-    giphy.suggestions
+    "trending-terms",
+    giphy.suggestions,
+    giphy.trendingSearch
   );
 }
 
@@ -83,10 +85,4 @@ if (gifosCommons.getPage() === "create") {
 // };
 
 // giphy.search(myQuery).then((data) => console.log("giphy gifs: ", data));
-// giphy
-//   .trendingSearch()
-//   .then((data) => console.log("giphy trending search: ", data));
-// giphy
-//   .suggestions(myQuery)
-//   .then((data) => console.log("giphy suggestions: ", data));
 // giphy.getGif("bstZCRuT1nucE").then((data) => console.log("giphy id:", data));

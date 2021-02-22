@@ -623,7 +623,6 @@ body {
 }
 
 .trending-terms__list {
-  color: var(--trending-terms-list-font-color);
   font-family: "Montserrat", sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
@@ -634,6 +633,7 @@ body {
 }
 
 .trending-terms__list > li {
+  color: var(--trending-terms-list-font-color);
   display: inline;
 }
 
@@ -643,6 +643,11 @@ body {
 
 .trending-terms__list > li:last-child::after {
   content: "";
+}
+
+.trending-terms__list > li a {
+  color: var(--trending-terms-list-font-color);
+  text-decoration: none;
 }
 
 @media (min-width: 30.938rem) {
