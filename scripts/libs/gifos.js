@@ -84,9 +84,9 @@ class GifosCommons {
 
   getPage = () => {
     let path = window.location.pathname;
-    if (path === "/") return "index";
     let page = path.split("/").pop();
     let name = page.split(".").slice(0, -1).join(".");
+    if (name === "") return "index";
     return name;
   };
 }
