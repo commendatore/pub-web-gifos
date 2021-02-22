@@ -1,51 +1,51 @@
 .navbar-logo__link--icon {
-  background-image: url(../../../assets/logo-mobile-noc.svg);
+  background-image: url(../assets/logo-mobile-noc.svg);
 }
 
 .navbar-buttons__hamburger-icon--open-menu {
-  background-image: url(../../../assets/burger-modo-noct.svg);
+  background-image: url(../assets/burger-modo-noct.svg);
 }
 
 .navbar-buttons__hamburger-icon--close-menu {
-  background-image: url(../../../assets/close-modo-noct.svg);
+  background-image: url(../assets/close-modo-noct.svg);
 }
 
 .search-bttn__submit {
-  background-image: url(../../../assets/icon-search-submit.svg);
+  background-image: url(../assets/icon-search-submit.svg);
 }
 
 .search-bttn__focus {
-  background-image: url(../../../assets/icon-search-modo-noct.svg);
+  background-image: url(../assets/icon-search-modo-noct.svg);
 }
 
 .search-bttn__clear {
-  background-image: url(../../../assets/close-modo-noct.svg);
+  background-image: url(../assets/close-modo-noct.svg);
 }
 
 @media (min-width: 48rem) {
   .carousel-trending__button-left {
-    background-image: url(../../../assets/button-slider-left-md-noct.svg);
+    background-image: url(../assets/button-slider-left-md-noct.svg);
   }
   .carousel-trending__button-left:hover {
-    background-image: url(../../../assets/button-slider-left-hover-md-noct.svg);
+    background-image: url(../assets/button-slider-left-hover-md-noct.svg);
   }
   .carousel-trending__button-right {
-    background-image: url(../../../assets/button-slider-right-md-noct.svg);
+    background-image: url(../assets/button-slider-right-md-noct.svg);
   }
   .carousel-trending__button-right:hover {
-    background-image: url(../../../assets/Button-Slider-right-hover-md-noct.svg);
+    background-image: url(../assets/Button-Slider-right-hover-md-noct.svg);
   }
 }
 
 @media (min-width: 64rem) {
   .navbar-buttons__create-gif--icon {
-    background-image: url(../../../assets/CTA-crear-gifo-modo-noc.svg);
+    background-image: url(../assets/CTA-crear-gifo-modo-noc.svg);
   }
   .navbar-buttons__create-gif--icon:hover {
-    background-image: url(../../../assets/CTA-crear-gifo-hover-modo-noc.svg);
+    background-image: url(../assets/CTA-crear-gifo-hover-modo-noc.svg);
   }
   .navbar-buttons__create-gif--icon:active {
-    background-image: url(../../../assets/CTA-crear-gifo-active-modo-noc.svg);
+    background-image: url(../assets/CTA-crear-gifo-active-modo-noc.svg);
   }
 }
 /*# sourceMappingURL=icons-dark.css.map */

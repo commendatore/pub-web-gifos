@@ -302,12 +302,6 @@ body {
     height: 3.75rem;
     margin-left: 9.75rem;
   }
-  .navbar-logo__link--light {
-    background-image: url(../../../assets/logo-desktop.svg);
-  }
-  .navbar-logo__link--dark {
-    background-image: url(../../../assets/logo-desktop-noc.svg);
-  }
   .navbar-buttons__hamburger {
     display: none;
   }
@@ -600,7 +594,7 @@ body {
 }
 
 .search-suggestions > li a::before {
-  background-image: url(/assets/icon-search-submit.svg);
+  background-image: url(../assets/icon-search-submit.svg);
   background-repeat: no-repeat;
   background-size: contain;
   content: "";

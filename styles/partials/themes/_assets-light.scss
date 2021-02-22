@@ -1,51 +1,51 @@
 .navbar-logo__link--icon {
-  background-image: url(../../../assets/logo-mobile.svg);
+  background-image: url(../assets/logo-mobile.svg);
 }
 
 .navbar-buttons__hamburger-icon--open-menu {
-  background-image: url(../../../assets/burger.svg);
+  background-image: url(../assets/burger.svg);
 }
 
 .navbar-buttons__hamburger-icon--close-menu {
-  background-image: url(../../../assets/close.svg);
+  background-image: url(../assets/close.svg);
 }
 
 .search-bttn__submit {
-  background-image: url(../../../assets/icon-search-submit.svg);
+  background-image: url(../assets/icon-search-submit.svg);
 }
 
 .search-bttn__focus {
-  background-image: url(../../../assets/icon-search.svg);
+  background-image: url(../assets/icon-search.svg);
 }
 
 .search-bttn__clear {
-  background-image: url(../../../assets/close.svg);
+  background-image: url(../assets/close.svg);
 }
 
 @media (min-width: 48rem) {
   .carousel-trending__button-left {
-    background-image: url(../../../assets/button-slider-left.svg);
+    background-image: url(../assets/button-slider-left.svg);
     &:hover {
-      background-image: url(../../../assets/button-slider-left-hover.svg);
+      background-image: url(../assets/button-slider-left-hover.svg);
     }
   }
 
   .carousel-trending__button-right {
-    background-image: url(../../../assets/Button-Slider-right.svg);
+    background-image: url(../assets/Button-Slider-right.svg);
     &:hover {
-      background-image: url(../../../assets/Button-Slider-right-hover.svg);
+      background-image: url(../assets/Button-Slider-right-hover.svg);
     }
   }
 }
 
 @media (min-width: 64rem) {
   .navbar-buttons__create-gif--icon {
-    background-image: url(../../../assets/CTA-crear-gifo.svg);
+    background-image: url(../assets/CTA-crear-gifo.svg);
     &:hover {
-      background-image: url(../../../assets/CTA-crear-gifo-hover.svg);
+      background-image: url(../assets/CTA-crear-gifo-hover.svg);
     }
     &:active {
-      background-image: url(../../../assets/CTA-crear-gifo-active.svg);
+      background-image: url(../assets/CTA-crear-gifo-active.svg);
     }
   }
 }
