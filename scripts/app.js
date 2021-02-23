@@ -30,7 +30,7 @@ if (gifosCommons.getPage() !== "create") {
 }
 
 const gifosSearchBox = new GifosSearch();
-if (gifosCommons.getPage() === "index") {
+if (gifosCommons.getPage() === "home") {
   gifosSearchBox.setSearchBox(
     "search-box",
     "suggestions-box",

@@ -4,13 +4,15 @@ class GifosCommons {
     this.hamburgerBttn = document.getElementById(hamburgerBttnId);
     this.hamburgerMenu = document.getElementById(hamburgerMenuId);
     this.themeBttn = document.getElementById(themeBttnId);
-    this.hamburgerBttn.addEventListener("click", this.toggleHamburger);
-    this.themeBttn.addEventListener("click", this.switchTheme);
 
-    // themes environment
-    this.lightMode = document.getElementById("theme-light");
-    this.nightMode = document.getElementById("theme-night");
+    this.hamburgerBttn.addEventListener("click", this.toggleHamburger);
+    this.themeBttn.addEventListener("click", this.toggleTheme);
+
+    // theme environment
+    this.iconsLight = document.getElementById("theme-light");
+    this.iconsNight = document.getElementById("theme-night");
     this.currentTheme = localStorage.getItem("theme");
+    if (this.isNightMode()) this.themeBttn.innerHTML = "Modo Diurno";
   }
 
   toggleHamburger = () => {
@@ -37,20 +39,7 @@ class GifosCommons {
     }
   };
 
-  isNightMode = () => {
-    // check current theme
-    if (this.currentTheme) {
-      if (this.currentTheme === "dark") {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  };
-
-  switchTheme = () => {
+  toggleTheme = () => {
     if (this.isNightMode()) {
       this.setLightMode();
       this.themeBttn.innerHTML = "Modo Nocturno";
@@ -60,34 +49,43 @@ class GifosCommons {
     }
   };
 
-  setNightMode = () => {
-    // change css root colors variables
-    document.documentElement.setAttribute("data-theme", "dark");
-    // change css assets
-    this.nightMode.media = "";
-    this.lightMode.media = "none";
+  isNightMode = () => {
+    // check current theme
+    if (this.currentTheme) {
+      if (this.currentTheme === "night") {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
 
-    localStorage.setItem("theme", "dark");
-    this.currentTheme = "dark";
+  setNightMode = () => {
+    // change theme css color variables
+    document.documentElement.setAttribute("data-theme", "night");
+    // change theme css assets
+    this.iconsNight.media = "";
+    this.iconsLight.media = "none";
+    // save current theme preference
+    localStorage.setItem("theme", "night");
+    this.currentTheme = "night";
   };
 
   setLightMode = () => {
-    // change css root colors variables
+    // change theme css color variables
     document.documentElement.setAttribute("data-theme", "light");
-    // change css assets
-    this.lightMode.media = "";
-    this.nightMode.media = "none";
-
+    // change theme css assets
+    this.iconsLight.media = "";
+    this.iconsNight.media = "none";
+    // save current theme preference
     localStorage.setItem("theme", "light");
     this.currentTheme = "light";
   };
 
   getPage = () => {
-    let path = window.location.pathname;
-    let page = path.split("/").pop();
-    let name = page.split(".").slice(0, -1).join(".");
-    if (name === "") return "index";
-    return name;
+    return document.documentElement.dataset.page;
   };
 }
 
@@ -99,6 +97,27 @@ class GifosSlides {
     this.apiTrending = undefined;
     this.trendingSliderLength = 0;
   }
+
+  setSlider = async (
+    htmlContainerId,
+    classType,
+    backwardBttnId,
+    forwardBttnId,
+    trendingGifsCallback
+  ) => {
+    this.trendingSlider = document.getElementById(htmlContainerId);
+    this.backwardBttn = document.getElementById(backwardBttnId);
+    this.forwardBttn = document.getElementById(forwardBttnId);
+    this.apiTrending = trendingGifsCallback;
+
+    this.backwardBttn.addEventListener("click", this.backwardSlides);
+    this.forwardBttn.addEventListener("click", this.forwardSlides);
+
+    let giphyArr = await this.apiTrending({ rating: "r" });
+    let gifosSlides = this.appendSlides(giphyArr, classType);
+    this.trendingSlider.innerHTML = gifosSlides.content;
+    this.trendingSliderLength = gifosSlides.length;
+  };
 
   appendSlides = (giphyArr, classType) => {
     let slides = [];
@@ -120,35 +139,14 @@ class GifosSlides {
     };
   };
 
-  forwardSlider = () => {
+  forwardSlides = () => {
     let step = this.trendingSlider.scrollWidth / this.trendingSliderLength;
     this.trendingSlider.scrollLeft += step;
   };
 
-  backwardSlider = () => {
+  backwardSlides = () => {
     let step = this.trendingSlider.scrollWidth / this.trendingSliderLength;
     this.trendingSlider.scrollLeft -= step;
-  };
-
-  setSlider = async (
-    htmlContainerId,
-    classType,
-    backwardBttnId,
-    forwardBttnId,
-    trendingGifsCallback
-  ) => {
-    this.trendingSlider = document.getElementById(htmlContainerId);
-    this.backwardBttn = document.getElementById(backwardBttnId);
-    this.forwardBttn = document.getElementById(forwardBttnId);
-    this.apiTrending = trendingGifsCallback;
-
-    this.backwardBttn.addEventListener("click", this.backwardSlider);
-    this.forwardBttn.addEventListener("click", this.forwardSlider);
-
-    let giphyArr = await this.apiTrending({ rating: "r" });
-    let gifosSlides = this.appendSlides(giphyArr, classType);
-    this.trendingSlider.innerHTML = gifosSlides.content;
-    this.trendingSliderLength = gifosSlides.length;
   };
 }
 
@@ -183,10 +181,13 @@ class GifosSearch {
     this.clearBttn.addEventListener("click", this.focusSearchBox);
     this.submitBttn.addEventListener("click", this.searchGifos);
     this.searchBox.addEventListener("input", this.validateSearch);
+    this.searchBox.addEventListener("keyup", ({ key }) => {
+      if (key === "Enter" && this.searchBox.checkValidity()) this.searchGifos();
+    });
 
     let content = await this.trendingSearch();
     this.trendingTerms.innerHTML = content;
-    this.linkTermSearch(this.trendingTerms);
+    this.linkSuggestions(this.trendingTerms);
   };
 
   focusSearchBox = () => {
@@ -233,7 +234,7 @@ class GifosSearch {
     );
   };
 
-  linkTermSearch = (contentBox) => {
+  linkSuggestions = (contentBox) => {
     let terms = contentBox.querySelectorAll("a");
     terms.forEach((term) => {
       term.addEventListener("click", (event) => {
@@ -244,12 +245,12 @@ class GifosSearch {
   };
 
   validateSearch = async () => {
-    if (this.searchBox.validity.valid) {
+    if (this.searchBox.checkValidity()) {
       let content = await this.autocomplete();
 
       if (content) {
         this.suggestionsBox.innerHTML = content;
-        this.linkTermSearch(this.suggestionsBox);
+        this.linkSuggestions(this.suggestionsBox);
         this.openSuggestions();
       } else {
         this.closeSuggestions();
@@ -261,8 +262,9 @@ class GifosSearch {
 
   autocomplete = async () => {
     let suggestions = [];
-
     let giphyArr = await this.apiSuggestions({ term: this.searchBox.value });
+
+    if (typeof giphyArr === "undefined") return false;
     if (!giphyArr.length) return false;
 
     giphyArr.forEach((term) => {

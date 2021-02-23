@@ -46,7 +46,7 @@ button:focus {
   --footer-copyright-text-color: #000;
 }
 
-[data-theme="dark"] {
+[data-theme="night"] {
   --main-bg-color: #37383c;
   --header-bg-color: #37383c;
   --header-border-top-color: #000000;
