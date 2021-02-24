@@ -1,0 +1,142 @@
+.trending {
+  height: 26.875rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--trending-bg-color);
+
+  h2 {
+    color: var(--trending-title-color);
+    font-family: $secondary-font;
+    font-size: 1.25rem;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    padding: 2.875rem 1.375rem 0 1.375rem;
+  }
+
+  p {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--trending-description-color);
+    width: 100%;
+    padding: 0.438rem 1.375rem 0 1.375rem;
+  }
+
+  span {
+    display: block;
+  }
+}
+
+.carousel {
+  width: 100%;
+  align-self: flex-start;
+  display: flex;
+
+  input[type="button"] {
+    display: none;
+  }
+}
+
+.carousel-slider {
+  width: 100%;
+  min-height: 15.75rem;
+  padding: 2rem 0;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  :last-child {
+    margin-right: 1.375rem;
+  }
+
+  /* Hide scrollbar */
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari and Opera
+  }
+}
+
+.carousel-slider__slide {
+  width: 15.25rem;
+  height: 11.75rem;
+  margin-left: 1.375rem;
+  flex-shrink: 0;
+  background-color: grey;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// 768px design desktop
+@media (min-width: 48rem) {
+  .trending {
+    height: 40rem;
+
+    h2 {
+      font-size: 1.563rem;
+      padding-top: 4.188rem;
+    }
+
+    p {
+      font-size: 1.125rem;
+      padding-top: 0.75rem;
+    }
+
+    span {
+      display: inline;
+    }
+  }
+
+  .carousel {
+    input[type="button"] {
+      width: 4rem;
+      height: 2.5rem;
+      display: block;
+      align-self: center;
+      border: none;
+      color: transparent;
+      background-size: contain;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center center;
+      cursor: pointer;
+    }
+  }
+
+  .carousel__bttn-left {
+    margin-left: 5.875rem;
+    margin-right: 1.375rem;
+  }
+
+  .carousel__bttn-right {
+    margin-right: 5.875rem;
+    margin-left: 1.375rem;
+  }
+
+  .carousel-slider {
+    width: 100%;
+    min-height: 23.814rem;
+    padding: 3.313rem 0;
+    scroll-snap-type: x mandatory;
+
+    :first-child {
+      margin-left: 0;
+    }
+
+    :last-child {
+      margin-right: 0;
+    }
+  }
+
+  .carousel-slider__slide {
+    width: 22.313rem;
+    height: 17.188rem;
+    scroll-snap-align: start;
+  }
+}

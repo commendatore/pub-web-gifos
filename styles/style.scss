@@ -10,16 +10,19 @@
 @import "./partials/base/reset";
 @import "./partials/base/variables";
 @import "./partials/base/mixins";
-@import "./partials/base/baserules";
+@import "./partials/base/constraints";
 
 // common elements
-@import "./partials/common/main";
-@import "./partials/common/header";
 @import "./partials/common/footer";
+@import "./partials/common/header";
+@import "./partials/common/main";
 
 // components
-@import "./partials/components/home";
-@import "./partials/components/create";
-@import "./partials/components/trending";
-@import "./partials/components/favorites";
-@import "./partials/components/gifos";
+@import "./partials/components/carousel";
+@import "./partials/components/search";
+
+// screens
+@import "./partials/screens/create";
+@import "./partials/screens/favorites";
+@import "./partials/screens/gifos";
+@import "./partials/screens/home";

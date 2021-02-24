@@ -21,10 +21,10 @@ if (gifosCommons.isNightMode()) {
 const gifosSlides = new GifosSlides();
 if (gifosCommons.getPage() !== "create") {
   gifosSlides.setSlider(
-    "trending-gifos",
-    "carousel-trending__slide",
-    "slider-backward-bttn",
-    "slider-forward-bttn",
+    "carousel",
+    "carousel-slider__slide",
+    "carousel-backward-bttn",
+    "carousel-forward-bttn",
     giphy.trendingGifs
   );
 }
@@ -33,11 +33,11 @@ const gifosSearchBox = new GifosSearch();
 if (gifosCommons.getPage() === "home") {
   gifosSearchBox.setSearchBox(
     "search-box",
-    "suggestions-box",
-    "submit-bttn",
-    "clear-bttn",
-    "trending-terms",
+    "search-suggestions-box",
+    "search-submit-bttn",
+    "search-clear-bttn",
     giphy.suggestions,
+    "search-trending",
     giphy.trendingSearch
   );
 }

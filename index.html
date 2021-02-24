@@ -72,27 +72,22 @@
     </header>
     <main class="main">
       <section class="home">
-        <div class="front">
-          <h2 class="front-title">
+        <div class="welcome">
+          <h2>
             Inspírate, busca, guarda, y crea <br />los mejores
             <span>GIFOS</span>
           </h2>
-          <img
-            class="front-logo"
-            src="./assets/ilustra_header.svg"
-            alt="GifOS"
-          />
+          <img src="./assets/ilustra_header.svg" alt="GifOS" />
         </div>
-        <div class="search">
+        <div class="search-box">
           <div class="search-form">
             <input
-              class="search-bttn search-bttn__submit search-bttn__submit--hide"
+              class="search-bttn__submit search-bttn__submit--hide"
               type="button"
               value="search"
-              id="submit-bttn"
+              id="search-submit-bttn"
             />
             <input
-              class="search-box"
               type="search"
               autocomplete="off"
               placeholder="Busca GIFOS y más"
@@ -101,37 +96,44 @@
               id="search-box"
             />
             <input
-              class="search-bttn search-bttn__focus"
+              class="search-bttn__focus"
               type="button"
               value="clear"
-              id="clear-bttn"
+              id="search-clear-bttn"
             />
           </div>
-          <ul
-            class="search-suggestions search-suggestions--hide"
-            id="suggestions-box"
-          ></ul>
+          <ul class="search-suggestions--hide" id="search-suggestions-box"></ul>
         </div>
-        <div class="trending-terms">
-          <h2 class="trending-terms__title">Trending:</h2>
-          <ul class="trending-terms__list" id="trending-terms"></ul>
+        <div class="search-trending">
+          <h2>Trending:</h2>
+          <ul id="search-trending"></ul>
+        </div>
+      </section>
+      <section class="results">
+        <span></span>
+        <h2>foobar</h2>
+        <div class="results-grid">
+          <div class="results-grid__slides" id="results-grid"></div>
+          <input class="results-grid__bttn" type="button" value="more" />
         </div>
       </section>
       <section class="trending">
-        <h2 class="trending-title">Trending GIFOS</h2>
-        <p class="trending-description">
-          Mirá los últimos <span>GIFOS de nuestra comunidad.</span>
-        </p>
+        <h2>Trending GIFOS</h2>
+        <p>Mirá los últimos <span>GIFOS de nuestra comunidad.</span></p>
         <div class="carousel">
-          <button
-            class="carousel-trending__button carousel-trending__button-left"
-            id="slider-backward-bttn"
-          ></button>
-          <div class="carousel-trending" id="trending-gifos"></div>
-          <button
-            class="carousel-trending__button carousel-trending__button-right"
-            id="slider-forward-bttn"
-          ></button>
+          <input
+            type="button"
+            value="backward"
+            class="carousel__bttn-left"
+            id="carousel-backward-bttn"
+          />
+          <div class="carousel-slider" id="carousel"></div>
+          <input
+            type="button"
+            value="forward"
+            class="carousel__bttn-right"
+            id="carousel-forward-bttn"
+          />
         </div>
       </section>
     </main>

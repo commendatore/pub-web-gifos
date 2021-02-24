@@ -35,7 +35,7 @@
         <div class="navbar-logo">
           <a
             class="navbar-logo__link navbar-logo__link--icon"
-            href="/index.html"
+            href="../index.html"
           ></a>
         </div>
         <div class="navbar-menu navbar-menu--close" id="hamburger-menu">
@@ -72,24 +72,26 @@
       </div>
     </header>
     <main class="main">
-      <div class="favorites"></div>
-      <div class="trending">
-        <h2 class="trending-title">Trending GIFOS</h2>
-        <p class="trending-description">
-          Mirá los últimos <span>GIFOS de nuestra comunidad.</span>
-        </p>
+      <section class="favorites"></section>
+      <section class="trending">
+        <h2>Trending GIFOS</h2>
+        <p>Mirá los últimos <span>GIFOS de nuestra comunidad.</span></p>
         <div class="carousel">
-          <button
-            class="carousel-trending__button carousel-trending__button-left"
-            id="slider-backward-bttn"
-          ></button>
-          <div class="carousel-trending" id="trending-gifos"></div>
-          <button
-            class="carousel-trending__button carousel-trending__button-right"
-            id="slider-forward-bttn"
-          ></button>
+          <input
+            type="button"
+            value="backward"
+            class="carousel__bttn-left"
+            id="carousel-backward-bttn"
+          />
+          <div class="carousel-slider" id="carousel"></div>
+          <input
+            type="button"
+            value="forward"
+            class="carousel__bttn-right"
+            id="carousel-forward-bttn"
+          />
         </div>
-      </div>
+      </section>
     </main>
     <footer class="footer">
       <div class="footer-social">

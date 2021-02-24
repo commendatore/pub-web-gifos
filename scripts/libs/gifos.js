@@ -166,17 +166,15 @@ class GifosSearch {
     suggestionsBoxId,
     submitBttnId,
     clearBttnId,
-    trendingTermsId,
     suggestionsCallback,
-    trendingTermsCallback
+    trendingTermsBoxId = undefined,
+    trendingTermsCallback = undefined
   ) => {
     this.searchBox = document.getElementById(searchBoxId);
     this.suggestionsBox = document.getElementById(suggestionsBoxId);
     this.submitBttn = document.getElementById(submitBttnId);
     this.clearBttn = document.getElementById(clearBttnId);
-    this.trendingTerms = document.getElementById(trendingTermsId);
     this.apiSuggestions = suggestionsCallback;
-    this.apiTrendingTerms = trendingTermsCallback;
 
     this.clearBttn.addEventListener("click", this.focusSearchBox);
     this.submitBttn.addEventListener("click", this.searchGifos);
@@ -185,9 +183,18 @@ class GifosSearch {
       if (key === "Enter" && this.searchBox.checkValidity()) this.searchGifos();
     });
 
-    let content = await this.trendingSearch();
-    this.trendingTerms.innerHTML = content;
-    this.linkSuggestions(this.trendingTerms);
+    // link trending terms content if needed
+    if (
+      typeof trendingTermsBoxId !== "undefined" &&
+      typeof trendingTermsCallback !== "undefined"
+    ) {
+      this.trendingTerms = document.getElementById(trendingTermsBoxId);
+      this.apiTrendingTerms = trendingTermsCallback;
+
+      let content = await this.trendingSearch();
+      this.trendingTerms.innerHTML = content;
+      this.linkSuggestions(this.trendingTerms);
+    }
   };
 
   focusSearchBox = () => {

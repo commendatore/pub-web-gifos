@@ -1,21 +1,21 @@
 body {
   display: none;
+  font-family: $primary-font, $secondary-font;
 }
 
 @media (min-width: 20rem) {
   body {
     display: block;
-    font-family: $primary-font, $secondary-font;
   }
 }
 
-// limit screen max width to 1440px
+// containers max-width 1440px
 @media (min-width: 90rem) {
   header,
   main,
   footer {
-    min-width: 20rem;
-    max-width: 90rem;
     margin: 0 calc((100vw - 90rem) / 2);
+    max-width: 90rem;
+    min-width: 20rem;
   }
 }

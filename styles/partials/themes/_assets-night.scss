@@ -23,14 +23,14 @@
 }
 
 @media (min-width: 48rem) {
-  .carousel-trending__button-left {
+  .carousel__bttn-left {
     background-image: url(../assets/button-slider-left-md-noct.svg);
     &:hover {
       background-image: url(../assets/button-slider-left-hover-md-noct.svg);
     }
   }
 
-  .carousel-trending__button-right {
+  .carousel__bttn-right {
     background-image: url(../assets/button-slider-right-md-noct.svg);
     &:hover {
       background-image: url(../assets/Button-Slider-right-hover-md-noct.svg);
