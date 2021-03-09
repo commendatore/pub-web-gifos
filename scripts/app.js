@@ -21,7 +21,7 @@ if (gifosCommons.isNightMode()) {
 const gifosSlides = new GifosSlides();
 if (gifosCommons.getPage() !== "create") {
   gifosSlides.setSlider(
-    "carousel",
+    "carousel-box",
     "carousel-slider__slide",
     "carousel-backward-bttn",
     "carousel-forward-bttn",
@@ -38,7 +38,10 @@ if (gifosCommons.getPage() === "home") {
     "search-clear-bttn",
     giphy.suggestions,
     "search-trending",
-    giphy.trendingSearch
+    giphy.trendingSearch,
+    "gifos-grid-box",
+    "gifos-grid__slide",
+    giphy.search
   );
 }
 
@@ -84,5 +87,4 @@ if (gifosCommons.getPage() === "create") {
 //   rating: "r",
 // };
 
-// giphy.search(myQuery).then((data) => console.log("giphy gifs: ", data));
 // giphy.getGif("bstZCRuT1nucE").then((data) => console.log("giphy id:", data));

@@ -99,13 +99,13 @@ class GifosSlides {
   }
 
   setSlider = async (
-    htmlContainerId,
-    classType,
+    carouselId,
+    carouselClass,
     backwardBttnId,
     forwardBttnId,
     trendingGifsCallback
   ) => {
-    this.trendingSlider = document.getElementById(htmlContainerId);
+    this.trendingSlider = document.getElementById(carouselId);
     this.backwardBttn = document.getElementById(backwardBttnId);
     this.forwardBttn = document.getElementById(forwardBttnId);
     this.apiTrending = trendingGifsCallback;
@@ -114,7 +114,7 @@ class GifosSlides {
     this.forwardBttn.addEventListener("click", this.forwardSlides);
 
     let giphyArr = await this.apiTrending({ rating: "r" });
-    let gifosSlides = this.appendSlides(giphyArr, classType);
+    let gifosSlides = this.appendSlides(giphyArr, carouselClass);
     this.trendingSlider.innerHTML = gifosSlides.content;
     this.trendingSliderLength = gifosSlides.length;
   };
@@ -159,6 +159,8 @@ class GifosSearch {
     this.trendingTerms = undefined;
     this.apiSuggestions = undefined;
     this.apiTrendingTerms = undefined;
+    this.resultsGrid = undefined;
+    this.apiSearch = undefined;
   }
 
   setSearchBox = async (
@@ -168,13 +170,19 @@ class GifosSearch {
     clearBttnId,
     suggestionsCallback,
     trendingTermsBoxId = undefined,
-    trendingTermsCallback = undefined
+    trendingTermsCallback = undefined,
+    resultsGridId,
+    resultsSlideClass,
+    searchCallback
   ) => {
     this.searchBox = document.getElementById(searchBoxId);
     this.suggestionsBox = document.getElementById(suggestionsBoxId);
     this.submitBttn = document.getElementById(submitBttnId);
     this.clearBttn = document.getElementById(clearBttnId);
     this.apiSuggestions = suggestionsCallback;
+    this.resultsGrid = document.getElementById(resultsGridId);
+    this.resultsSlideClass = resultsSlideClass;
+    this.apiSearch = searchCallback;
 
     this.clearBttn.addEventListener("click", this.focusSearchBox);
     this.submitBttn.addEventListener("click", this.searchGifos);
@@ -296,9 +304,35 @@ class GifosSearch {
     return terms.join("\n");
   };
 
-  searchGifos = () => {
+  searchGifos = async () => {
     this.closeSuggestions();
-    console.log("search gifo: " + this.searchBox.value);
+    let query = {
+      term: this.searchBox.value,
+      limit: 12,
+      offset: 0,
+      rating: "r",
+    };
+
+    let giphyArr = await this.apiSearch(query);
+    this.resultsGrid.innerHTML = this.appendSlides(
+      giphyArr,
+      this.resultsSlideClass
+    );
+  };
+
+  appendSlides = (giphyArr, classType) => {
+    let slides = [];
+
+    giphyArr.forEach((giphy) => {
+      let slide = `
+<div class="${classType}">
+<img src="${giphy.url}" alt="${giphy.title}">
+</div>`;
+
+      slides.push(slide);
+    });
+
+    return slides.join("\n");
   };
 }
 
