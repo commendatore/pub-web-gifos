@@ -103,7 +103,7 @@
   display: block;
 }
 
-.search-trending {
+.trending-search {
   width: 100%;
   h2 {
     color: var(--search-trending-title-font-color);
@@ -143,7 +143,7 @@
 
 // 768px design desktop
 @media (min-width: 48rem) {
-  .search-trending {
+  .trending-search {
     h2 {
       font-size: 1.125rem;
       margin-top: 4.563rem;

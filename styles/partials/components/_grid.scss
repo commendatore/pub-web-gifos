@@ -1,4 +1,4 @@
-.gifos-grid {
+.grid {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,7 @@
   }
 }
 
-.gifos-grid > {
+.grid > {
   div {
     display: grid;
     grid-gap: 1.25rem;
@@ -36,7 +36,7 @@
   }
 }
 
-.gifos-grid__slide {
+.grid__slide {
   display: flex;
   height: calc((((20 - (1.25 * 0) - (2 * 1.25)) / 1 / 20) * 120 / 155) * 100vw);
   justify-content: center;
@@ -54,7 +54,7 @@
 
 // 370px = 2 columns mobile
 @media (min-width: 23.125rem) {
-  .gifos-grid__slide {
+  .grid__slide {
     height: calc(
       (((23.125 - (1.25 * 1) - (2 * 1.25)) / 2 / 23.125) * 120 / 155) * 100vw
     );
@@ -63,7 +63,7 @@
 
 // 545px = 3 columns mobile
 @media (min-width: 34.063rem) {
-  .gifos-grid__slide {
+  .grid__slide {
     height: calc(
       (((34.063 - (1.25 * 2) - (2 * 1.25)) / 3 / 34.063) * 120 / 155) * 100vw
     );
@@ -72,7 +72,7 @@
 
 // 720px = 4 columns mobile
 @media (min-width: 45rem) {
-  .gifos-grid__slide {
+  .grid__slide {
     height: calc(
       (((45 - (1.25 * 3) - (2 * 1.25)) / 4 / 45) * 120 / 155) * 100vw
     );
@@ -81,18 +81,18 @@
 
 // 768px = 1 column desktop
 @media (min-width: 48rem) {
-  .gifos-grid {
+  .grid {
     padding: 0 9.688rem;
   }
 
-  .gifos-grid > {
+  .grid > {
     div {
       grid-gap: 1.875rem;
       grid-template-columns: repeat(auto-fill, minmax(16.25rem, 1fr));
     }
   }
 
-  .gifos-grid__slide {
+  .grid__slide {
     min-width: 16.25rem;
     height: calc(
       (((48 - (1.875 * 0) - (2 * 9.688)) / 1 / 48) * 200 / 260) * 100vw
@@ -102,7 +102,7 @@
 
 // 860px = 2 columns desktop
 @media (min-width: 53.75rem) {
-  .gifos-grid__slide {
+  .grid__slide {
     height: calc(
       (((53.75 - (1.875 * 1) - (2 * 9.688)) / 2 / 53.75) * 200 / 260) * 100vw
     );
@@ -111,7 +111,7 @@
 
 // 1150px = 3 columns desktop
 @media (min-width: 71.875rem) {
-  .gifos-grid__slide {
+  .grid__slide {
     height: calc(
       (((71.875 - (1.875 * 2) - (2 * 9.688)) / 3 / 71.875) * 200 / 260) * 100vw
     );
@@ -120,7 +120,7 @@
 
 // 1440px = 4 columns desktop
 @media (min-width: 90rem) {
-  .gifos-grid__slide {
+  .grid__slide {
     height: 12.5rem;
   }
 }
