@@ -152,41 +152,45 @@ class GifosSlides {
 
 class GifosSearch {
   constructor() {
+    this.apiSearch = undefined;
     this.searchBox = undefined;
     this.suggestionsBox = undefined;
     this.submitBttn = undefined;
     this.clearBttn = undefined;
-    this.trendingTerms = undefined;
     this.apiSuggestions = undefined;
-    this.apiTrendingTerms = undefined;
+    this.results = undefined;
     this.resultsGrid = undefined;
-    this.apiSearch = undefined;
+    this.resultsSlideClass = undefined;
+    this.trendingTerms = undefined;
+    this.apiTrendingTerms = undefined;
   }
 
   setSearchBox = async (
+    searchCallback,
+    suggestionsCallback,
     searchBoxId,
     suggestionsBoxId,
     submitBttnId,
     clearBttnId,
-    suggestionsCallback,
-    trendingTermsBoxId = undefined,
-    trendingTermsCallback = undefined,
+    resultsId,
     resultsGridId,
     resultsSlideClass,
-    searchCallback
+    trendingTermsCallback = undefined,
+    trendingTermsBoxId = undefined
   ) => {
+    this.apiSearch = searchCallback;
     this.searchBox = document.getElementById(searchBoxId);
     this.suggestionsBox = document.getElementById(suggestionsBoxId);
     this.submitBttn = document.getElementById(submitBttnId);
     this.clearBttn = document.getElementById(clearBttnId);
     this.apiSuggestions = suggestionsCallback;
+    this.results = document.getElementById(resultsId);
     this.resultsGrid = document.getElementById(resultsGridId);
     this.resultsSlideClass = resultsSlideClass;
-    this.apiSearch = searchCallback;
 
     this.clearBttn.addEventListener("click", this.focusSearchBox);
     this.submitBttn.addEventListener("click", this.searchGifos);
-    this.searchBox.addEventListener("input", this.validateSearch);
+    this.searchBox.addEventListener("input", this.validateSuggestions);
     this.searchBox.addEventListener("keyup", ({ key }) => {
       if (key === "Enter" && this.searchBox.checkValidity()) this.searchGifos();
     });
@@ -208,7 +212,8 @@ class GifosSearch {
   focusSearchBox = () => {
     this.searchBox.value = "";
     this.searchBox.focus();
-    this.validateSearch();
+    this.validateSuggestions();
+    this.closeResults();
   };
 
   closeSuggestions = () => {
@@ -249,6 +254,14 @@ class GifosSearch {
     );
   };
 
+  openResults = () => {
+    this.results.classList.replace("results--hide", "results--show");
+  };
+
+  closeResults = () => {
+    this.results.classList.replace("results--show", "results--hide");
+  };
+
   linkSuggestions = (contentBox) => {
     let terms = contentBox.querySelectorAll("a");
     terms.forEach((term) => {
@@ -259,7 +272,7 @@ class GifosSearch {
     });
   };
 
-  validateSearch = async () => {
+  validateSuggestions = async () => {
     if (this.searchBox.checkValidity()) {
       let content = await this.autocomplete();
 
@@ -306,6 +319,8 @@ class GifosSearch {
 
   searchGifos = async () => {
     this.closeSuggestions();
+    this.openResults();
+    this.results.getElementsByTagName("h2")[0].innerHTML = this.searchBox.value;
     let query = {
       term: this.searchBox.value,
       limit: 12,

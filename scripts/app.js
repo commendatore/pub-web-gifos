@@ -32,16 +32,17 @@ if (gifosCommons.getPage() !== "create") {
 const gifosSearchBox = new GifosSearch();
 if (gifosCommons.getPage() === "home") {
   gifosSearchBox.setSearchBox(
+    giphy.search,
+    giphy.suggestions,
     "search-box",
     "search-suggestions-box",
     "search-submit-bttn",
     "search-clear-bttn",
-    giphy.suggestions,
-    "search-trending",
+    "results-box",
+    "grid-box",
+    "grid__slide",
     giphy.trendingSearch,
-    "gifos-grid-box",
-    "gifos-grid__slide",
-    giphy.search
+    "trending-search-box"
   );
 }
 
