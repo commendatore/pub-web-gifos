@@ -151,7 +151,12 @@ class GifosSlides {
 }
 
 class GifosSearch {
-  constructor() {
+  constructor(query) {
+    this.offset = 0;
+    this.total = 0;
+    this.limit = query.limit;
+    this.rating = query.rating;
+
     this.apiSearch = undefined;
     this.searchBox = undefined;
     this.suggestionsBox = undefined;
@@ -174,28 +179,31 @@ class GifosSearch {
     clearBttnId,
     resultsId,
     resultsGridId,
+    moreBttnId,
     resultsSlideClass,
     trendingTermsCallback = undefined,
     trendingTermsBoxId = undefined
   ) => {
     this.apiSearch = searchCallback;
+    this.apiSuggestions = suggestionsCallback;
     this.searchBox = document.getElementById(searchBoxId);
     this.suggestionsBox = document.getElementById(suggestionsBoxId);
     this.submitBttn = document.getElementById(submitBttnId);
     this.clearBttn = document.getElementById(clearBttnId);
-    this.apiSuggestions = suggestionsCallback;
     this.results = document.getElementById(resultsId);
     this.resultsGrid = document.getElementById(resultsGridId);
+    this.moreBttn = document.getElementById(moreBttnId);
     this.resultsSlideClass = resultsSlideClass;
 
-    this.clearBttn.addEventListener("click", this.focusSearchBox);
-    this.submitBttn.addEventListener("click", this.searchGifos);
     this.searchBox.addEventListener("input", this.validateSuggestions);
     this.searchBox.addEventListener("keyup", ({ key }) => {
       if (key === "Enter" && this.searchBox.checkValidity()) this.searchGifos();
     });
+    this.submitBttn.addEventListener("click", this.searchGifos);
+    this.clearBttn.addEventListener("click", this.focusSearchBox);
+    this.moreBttn.addEventListener("click", this.nextPage);
 
-    // link trending terms content if needed
+    // trending terms links
     if (
       typeof trendingTermsBoxId !== "undefined" &&
       typeof trendingTermsCallback !== "undefined"
@@ -256,6 +264,7 @@ class GifosSearch {
 
   openResults = () => {
     this.results.classList.replace("results--hide", "results--show");
+    this.moreBttn.style.visibility = "visible";
   };
 
   closeResults = () => {
@@ -318,21 +327,44 @@ class GifosSearch {
   };
 
   searchGifos = async () => {
+    this.offset = 0;
+
     this.closeSuggestions();
     this.openResults();
     this.results.getElementsByTagName("h2")[0].innerHTML = this.searchBox.value;
     let query = {
       term: this.searchBox.value,
-      limit: 12,
-      offset: 0,
-      rating: "r",
+      limit: this.limit,
+      offset: this.offset,
+      rating: this.rating,
     };
 
     let giphyArr = await this.apiSearch(query);
+    this.total = giphyArr.total;
     this.resultsGrid.innerHTML = this.appendSlides(
-      giphyArr,
+      giphyArr.images,
       this.resultsSlideClass
     );
+  };
+
+  nextPage = async () => {
+    this.offset += this.limit;
+    let query = {
+      term: this.searchBox.value,
+      limit: this.limit,
+      offset: this.offset,
+      rating: this.rating,
+    };
+
+    let giphyArr = await this.apiSearch(query);
+    const slides = this.appendSlides(giphyArr.images, this.resultsSlideClass);
+
+    this.resultsGrid.insertAdjacentHTML("beforeend", slides);
+
+    // correct disable of button when reaching last page not working
+    if (this.total <= this.offset) {
+      this.moreBttn.style.visibility = "hidden";
+    }
   };
 
   appendSlides = (giphyArr, classType) => {

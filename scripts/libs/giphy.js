@@ -19,7 +19,7 @@ class GiphyAPI {
 
     const res = await fetch(endpoint);
     const json = await res.json();
-    return json.data.map((arr) => {
+    const images = json.data.map((arr) => {
       return {
         id: arr.id,
         url: arr.images.original.url,
@@ -27,6 +27,11 @@ class GiphyAPI {
         username: arr.username,
       };
     });
+
+    return {
+      images: images,
+      total: json.pagination.total_count,
+    };
   };
 
   suggestions = async (query) => {

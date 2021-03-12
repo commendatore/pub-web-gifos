@@ -29,17 +29,18 @@ if (gifosCommons.getPage() !== "create") {
   );
 }
 
-const gifosSearchBox = new GifosSearch();
+const gifosSearchBox = new GifosSearch({ limit: 12, rating: "r" });
 if (gifosCommons.getPage() === "home") {
   gifosSearchBox.setSearchBox(
     giphy.search,
-    giphy.suggestions,
+    giphy.suggestions, // change for autocomplete endpoint
     "search-box",
     "search-suggestions-box",
     "search-submit-bttn",
     "search-clear-bttn",
     "results-box",
     "grid-box",
+    "more-bttn",
     "grid__slide",
     giphy.trendingSearch,
     "trending-search-box"
