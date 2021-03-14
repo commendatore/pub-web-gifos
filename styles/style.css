@@ -39,6 +39,7 @@ button:focus {
   --results-title-font-color: #572ee5;
   --results-button-hover-color: #fff;
   --results-button-border-color: #572ee5;
+  --results-not-found-text-color: #50e3c2;
   --trending-bg-color: #f3f5f8;
   --trending-title-color: #572ee5;
   --trending-description-color: #000;
@@ -73,6 +74,7 @@ button:focus {
   --results-title-font-color: #fff;
   --results-button-hover-color: #000;
   --results-button-border-color: #fff;
+  --results-not-found-text-color: #fff;
   --trending-bg-color: #222326;
   --trending-title-color: #fff;
   --trending-description-color: #fff;
@@ -601,7 +603,7 @@ body {
   flex-direction: column;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding: 0 1.25rem;
+  padding: 2.375rem 1.25rem 0 1.25rem;
   width: 100%;
 }
 
@@ -682,7 +684,7 @@ body {
 
 @media (min-width: 48rem) {
   .grid {
-    padding: 0 9.688rem;
+    padding: 3.75rem 9.688rem 0 9.688rem;
   }
   .grid > div {
     grid-gap: 1.875rem;
@@ -1058,7 +1060,6 @@ body {
   color: var(--results-title-font-color);
   font-family: "Montserrat", sans-serif;
   font-size: 1.563rem;
-  padding-bottom: 2.375rem;
   padding-top: 2.75rem;
   text-align: center;
 }
@@ -1071,6 +1072,35 @@ body {
 
 .results--hide {
   display: none;
+}
+
+.not-found {
+  -ms-flex-line-pack: center;
+  align-content: center;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-top: 3.438rem;
+  width: 100%;
+}
+
+.not-found img {
+  display: inline-block;
+  height: 9.375rem;
+  margin: auto;
+  width: 9.375rem;
+}
+
+.not-found p {
+  color: var(--results-not-found-text-color);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.375rem;
+  font-weight: bold;
+  padding: 1.875rem 1.25rem 5rem 1.25rem;
+  text-align: center;
+  width: 100%;
 }
 
 @media (min-width: 30.938rem) {
@@ -1097,7 +1127,12 @@ body {
   }
   .results h2 {
     font-size: 2.188rem;
-    padding-bottom: 3.75rem;
     padding-top: 5rem;
+  }
+  .not-found {
+    padding-top: 6.875rem;
+  }
+  .not-found p {
+    padding-bottom: 9.375rem;
   }
 }

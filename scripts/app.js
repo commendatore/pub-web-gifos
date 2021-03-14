@@ -43,7 +43,7 @@ if (gifosCommons.getPage() === "home") {
     "more-bttn",
     "grid__slide",
     giphy.trendingSearch,
-    "trending-search-box"
+    "trending-terms-box"
   );
 }
 

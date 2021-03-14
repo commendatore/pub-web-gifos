@@ -49,7 +49,6 @@
     color: var(--results-title-font-color);
     font-family: $secondary-font;
     font-size: 1.563rem;
-    padding-bottom: 2.375rem;
     padding-top: 2.75rem;
     text-align: center;
   }
@@ -61,6 +60,31 @@
 
 .results--hide {
   display: none;
+}
+
+.not-found {
+  align-content: center;
+  display: none;
+  flex-direction: column;
+  padding-top: 3.438rem;
+  width: 100%;
+
+  img {
+    display: inline-block;
+    height: 9.375rem;
+    margin: auto;
+    width: 9.375rem;
+  }
+
+  p {
+    color: var(--results-not-found-text-color);
+    font-family: $secondary-font;
+    font-size: 1.375rem;
+    font-weight: bold;
+    padding: 1.875rem 1.25rem 5rem 1.25rem;
+    text-align: center;
+    width: 100%;
+  }
 }
 
 // 495px front page title break line
@@ -97,8 +121,15 @@
 
     h2 {
       font-size: 2.188rem;
-      padding-bottom: 3.75rem;
       padding-top: 5rem;
+    }
+  }
+
+  .not-found {
+    padding-top: 6.875rem;
+
+    p {
+      padding-bottom: 9.375rem;
     }
   }
 }
