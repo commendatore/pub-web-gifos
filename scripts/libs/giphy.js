@@ -34,11 +34,13 @@ class GiphyAPI {
     };
   };
 
-  suggestions = async (query) => {
-    const path = `/tags/related/${query.term}`;
+  autocomplete = async (query) => {
+    const path = `/gifs/search/tags`;
     const params = `
 ?${this.apiKey}
-&limit=${query.limit}`;
+&q=${query.term}
+&limit=${query.limit}
+&offset=${query.offset}`;
 
     const endpoint = this.urlAPI + path + params;
 
@@ -47,9 +49,12 @@ class GiphyAPI {
     return json.data;
   };
 
-  trendingSearch = async () => {
-    const path = `/trending/searches`;
-    const params = `?${this.apiKey}`;
+  suggestions = async (query) => {
+    const path = `/tags/related/${query.term}`;
+    const params = `
+?${this.apiKey}
+&limit=${query.limit}`;
+
     const endpoint = this.urlAPI + path + params;
 
     const res = await fetch(endpoint);
@@ -77,6 +82,16 @@ class GiphyAPI {
         username: arr.username,
       };
     });
+  };
+
+  trendingSearch = async () => {
+    const path = `/trending/searches`;
+    const params = `?${this.apiKey}`;
+    const endpoint = this.urlAPI + path + params;
+
+    const res = await fetch(endpoint);
+    const json = await res.json();
+    return json.data;
   };
 
   upload = async (gifData) => {
