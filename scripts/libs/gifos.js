@@ -157,24 +157,27 @@ class GifosSearch {
     this.limit = query.limit;
     this.rating = query.rating;
 
+    this.lastPage = false;
+
     this.apiSearch = undefined;
+    this.apiAutocomplete = undefined;
     this.searchBox = undefined;
-    this.suggestionsBox = undefined;
+    this.autocompleteBox = undefined;
     this.submitBttn = undefined;
     this.clearBttn = undefined;
-    this.apiSuggestions = undefined;
     this.results = undefined;
     this.resultsGrid = undefined;
+    this.moreBttn = undefined;
     this.resultsSlideClass = undefined;
-    this.trendingTerms = undefined;
     this.apiTrendingTerms = undefined;
+    this.trendingTerms = undefined;
   }
 
   setSearchBox = async (
     searchCallback,
-    suggestionsCallback,
+    autocompleteCallback,
     searchBoxId,
-    suggestionsBoxId,
+    autocompleteBoxId,
     submitBttnId,
     clearBttnId,
     resultsId,
@@ -185,9 +188,9 @@ class GifosSearch {
     trendingTermsBoxId = undefined
   ) => {
     this.apiSearch = searchCallback;
-    this.apiSuggestions = suggestionsCallback;
+    this.apiAutocomplete = autocompleteCallback;
     this.searchBox = document.getElementById(searchBoxId);
-    this.suggestionsBox = document.getElementById(suggestionsBoxId);
+    this.autocompleteBox = document.getElementById(autocompleteBoxId);
     this.submitBttn = document.getElementById(submitBttnId);
     this.clearBttn = document.getElementById(clearBttnId);
     this.results = document.getElementById(resultsId);
@@ -195,7 +198,7 @@ class GifosSearch {
     this.moreBttn = document.getElementById(moreBttnId);
     this.resultsSlideClass = resultsSlideClass;
 
-    this.searchBox.addEventListener("input", this.validateSuggestions);
+    this.searchBox.addEventListener("input", this.validateSearch);
     this.searchBox.addEventListener("keyup", ({ key }) => {
       if (key === "Enter" && this.searchBox.checkValidity()) this.searchGifos();
     });
@@ -208,8 +211,8 @@ class GifosSearch {
       typeof trendingTermsBoxId !== "undefined" &&
       typeof trendingTermsCallback !== "undefined"
     ) {
-      this.trendingTerms = document.getElementById(trendingTermsBoxId);
       this.apiTrendingTerms = trendingTermsCallback;
+      this.trendingTerms = document.getElementById(trendingTermsBoxId);
 
       let content = await this.trendingSearch();
       this.trendingTerms.innerHTML = content;
@@ -220,11 +223,27 @@ class GifosSearch {
   focusSearchBox = () => {
     this.searchBox.value = "";
     this.searchBox.focus();
-    this.validateSuggestions();
+    this.validateSearch();
     this.closeResults();
   };
 
-  closeSuggestions = () => {
+  openAutocomplete = () => {
+    this.submitBttn.classList.replace(
+      "search-bttn__submit--hide",
+      "search-bttn__submit--show"
+    );
+    this.clearBttn.classList.replace(
+      "search-bttn__focus",
+      "search-bttn__clear"
+    );
+
+    this.autocompleteBox.classList.replace(
+      "search-autocomplete--hide",
+      "search-autocomplete--show"
+    );
+  };
+
+  closeAutocomplete = () => {
     this.submitBttn.classList.replace(
       "search-bttn__submit--show",
       "search-bttn__submit--hide"
@@ -240,25 +259,9 @@ class GifosSearch {
         "search-bttn__clear"
       );
     }
-    this.suggestionsBox.classList.replace(
-      "search-suggestions--show",
-      "search-suggestions--hide"
-    );
-  };
-
-  openSuggestions = () => {
-    this.submitBttn.classList.replace(
-      "search-bttn__submit--hide",
-      "search-bttn__submit--show"
-    );
-    this.clearBttn.classList.replace(
-      "search-bttn__focus",
-      "search-bttn__clear"
-    );
-
-    this.suggestionsBox.classList.replace(
-      "search-suggestions--hide",
-      "search-suggestions--show"
+    this.autocompleteBox.classList.replace(
+      "search-autocomplete--show",
+      "search-autocomplete--hide"
     );
   };
 
@@ -274,42 +277,44 @@ class GifosSearch {
   linkSuggestions = (contentBox) => {
     let terms = contentBox.querySelectorAll("a");
     terms.forEach((term) => {
-      term.addEventListener("click", (event) => {
-        this.searchBox.value = event.target.innerHTML;
+      term.addEventListener("click", (e) => {
+        this.searchBox.value = e.target.innerHTML;
         this.searchGifos();
       });
     });
   };
 
-  validateSuggestions = async () => {
+  validateSearch = async () => {
     if (this.searchBox.checkValidity()) {
       let content = await this.autocomplete();
 
       if (content) {
-        this.suggestionsBox.innerHTML = content;
-        this.linkSuggestions(this.suggestionsBox);
-        this.openSuggestions();
+        this.autocompleteBox.innerHTML = content;
+        this.linkSuggestions(this.autocompleteBox);
+        this.openAutocomplete();
       } else {
-        this.closeSuggestions();
+        this.closeAutocomplete();
       }
     } else {
-      this.closeSuggestions();
+      this.closeAutocomplete();
     }
   };
 
   autocomplete = async () => {
-    let suggestions = [];
-    let giphyArr = await this.apiSuggestions({ term: this.searchBox.value });
+    let autocomplete = [];
+    let giphyArr = await this.apiAutocomplete({
+      term: this.searchBox.value,
+      limit: 11,
+    });
 
-    if (typeof giphyArr === "undefined") return false;
-    if (!giphyArr.length) return false;
+    if (typeof giphyArr === "undefined" || !giphyArr.length) return false;
 
     giphyArr.forEach((term) => {
       let suggestion = `<li><a href="#">${term.name}</a></li>`;
-      suggestions.push(suggestion);
+      autocomplete.push(suggestion);
     });
 
-    return suggestions.join("\n");
+    return autocomplete.join("\n");
   };
 
   trendingSearch = async () => {
@@ -317,19 +322,19 @@ class GifosSearch {
     let limit = 5;
     let giphyArr = await this.apiTrendingTerms();
 
-    giphyArr.some((tag, i) => {
-      if (limit && i === limit) return terms.join("\n");
-      let term = `<li><a href="#">${tag}</a></li>`;
+    for (let i = 0; i < limit; i++) {
+      let term = `<li><a href="#">${giphyArr[i]}</a></li>`;
       terms.push(term);
-    });
+    }
 
     return terms.join("\n");
   };
 
   searchGifos = async () => {
+    this.lastPage = false;
     this.offset = 0;
 
-    this.closeSuggestions();
+    this.closeAutocomplete();
     this.openResults();
     this.results.getElementsByTagName("h2")[0].innerHTML = this.searchBox.value;
     let query = {
@@ -348,7 +353,12 @@ class GifosSearch {
   };
 
   nextPage = async () => {
+    if (this.lastPage) {
+      this.moreBttn.style.visibility = "hidden";
+    }
+
     this.offset += this.limit;
+
     let query = {
       term: this.searchBox.value,
       limit: this.limit,
@@ -361,9 +371,8 @@ class GifosSearch {
 
     this.resultsGrid.insertAdjacentHTML("beforeend", slides);
 
-    // correct disable of button when reaching last page not working
-    if (this.total <= this.offset) {
-      this.moreBttn.style.visibility = "hidden";
+    if (this.total <= this.offset + this.limit * 2) {
+      this.lastPage = true;
     }
   };
 
