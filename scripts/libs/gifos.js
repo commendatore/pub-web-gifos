@@ -152,11 +152,11 @@ class GifosSlides {
 
 class GifosSearch {
   constructor(query) {
-    this.offset = 0;
-    this.total = 0;
     this.limit = query.limit;
     this.rating = query.rating;
 
+    this.total = 0;
+    this.offset = 0;
     this.lastPage = false;
 
     this.apiSearch = undefined;
@@ -165,12 +165,12 @@ class GifosSearch {
     this.autocompleteBox = undefined;
     this.submitBttn = undefined;
     this.clearBttn = undefined;
-    this.results = undefined;
-    this.resultsGrid = undefined;
+    this.resultsBox = undefined;
+    this.resultsGridBox = undefined;
     this.moreBttn = undefined;
     this.resultsSlideClass = undefined;
     this.apiTrendingTerms = undefined;
-    this.trendingTerms = undefined;
+    this.trendingTermsBox = undefined;
   }
 
   setSearchBox = async (
@@ -180,8 +180,8 @@ class GifosSearch {
     autocompleteBoxId,
     submitBttnId,
     clearBttnId,
-    resultsId,
-    resultsGridId,
+    resultsBoxId,
+    resultsGridBoxId,
     moreBttnId,
     resultsSlideClass,
     trendingTermsCallback = undefined,
@@ -193,14 +193,15 @@ class GifosSearch {
     this.autocompleteBox = document.getElementById(autocompleteBoxId);
     this.submitBttn = document.getElementById(submitBttnId);
     this.clearBttn = document.getElementById(clearBttnId);
-    this.results = document.getElementById(resultsId);
-    this.resultsGrid = document.getElementById(resultsGridId);
+    this.resultsBox = document.getElementById(resultsBoxId);
+    this.resultsGridBox = document.getElementById(resultsGridBoxId);
     this.moreBttn = document.getElementById(moreBttnId);
     this.resultsSlideClass = resultsSlideClass;
 
     this.searchBox.addEventListener("input", this.validateSearch);
     this.searchBox.addEventListener("keyup", ({ key }) => {
       if (key === "Enter" && this.searchBox.checkValidity()) this.searchGifos();
+      if (key === "Escape") this.focusSearchBox();
     });
     this.submitBttn.addEventListener("click", this.searchGifos);
     this.clearBttn.addEventListener("click", this.focusSearchBox);
@@ -212,11 +213,11 @@ class GifosSearch {
       typeof trendingTermsCallback !== "undefined"
     ) {
       this.apiTrendingTerms = trendingTermsCallback;
-      this.trendingTerms = document.getElementById(trendingTermsBoxId);
+      this.trendingTermsBox = document.getElementById(trendingTermsBoxId);
 
-      let content = await this.trendingSearch();
-      this.trendingTerms.innerHTML = content;
-      this.linkSuggestions(this.trendingTerms);
+      let content = await this.trendingTerms();
+      this.trendingTermsBox.innerHTML = content;
+      this.linkSuggestions(this.trendingTermsBox);
     }
   };
 
@@ -225,6 +226,46 @@ class GifosSearch {
     this.searchBox.focus();
     this.validateSearch();
     this.closeResults();
+  };
+
+  linkSuggestions = (contentBox) => {
+    let terms = contentBox.querySelectorAll("a");
+    terms.forEach((term) => {
+      term.addEventListener("click", (e) => {
+        this.searchBox.value = e.target.innerHTML;
+        this.searchGifos();
+      });
+    });
+  };
+
+  trendingTerms = async () => {
+    let terms = [];
+    let limit = 5;
+    let giphyArr = await this.apiTrendingTerms();
+
+    for (let i = 0; i < limit; i++) {
+      let term = `<li><a href="#">${giphyArr[i]}</a></li>`;
+      terms.push(term);
+    }
+
+    return terms.join("\n");
+  };
+
+  autocomplete = async () => {
+    let autocomplete = [];
+    let giphyArr = await this.apiAutocomplete({
+      term: this.searchBox.value,
+      limit: 11,
+    });
+
+    if (typeof giphyArr === "undefined" || !giphyArr.length) return false;
+
+    giphyArr.forEach((term) => {
+      let suggestion = `<li><a href="#">${term.name}</a></li>`;
+      autocomplete.push(suggestion);
+    });
+
+    return autocomplete.join("\n");
   };
 
   openAutocomplete = () => {
@@ -265,25 +306,6 @@ class GifosSearch {
     );
   };
 
-  openResults = () => {
-    this.results.classList.replace("results--hide", "results--show");
-    this.moreBttn.style.visibility = "visible";
-  };
-
-  closeResults = () => {
-    this.results.classList.replace("results--show", "results--hide");
-  };
-
-  linkSuggestions = (contentBox) => {
-    let terms = contentBox.querySelectorAll("a");
-    terms.forEach((term) => {
-      term.addEventListener("click", (e) => {
-        this.searchBox.value = e.target.innerHTML;
-        this.searchGifos();
-      });
-    });
-  };
-
   validateSearch = async () => {
     if (this.searchBox.checkValidity()) {
       let content = await this.autocomplete();
@@ -300,43 +322,15 @@ class GifosSearch {
     }
   };
 
-  autocomplete = async () => {
-    let autocomplete = [];
-    let giphyArr = await this.apiAutocomplete({
-      term: this.searchBox.value,
-      limit: 11,
-    });
-
-    if (typeof giphyArr === "undefined" || !giphyArr.length) return false;
-
-    giphyArr.forEach((term) => {
-      let suggestion = `<li><a href="#">${term.name}</a></li>`;
-      autocomplete.push(suggestion);
-    });
-
-    return autocomplete.join("\n");
-  };
-
-  trendingSearch = async () => {
-    let terms = [];
-    let limit = 5;
-    let giphyArr = await this.apiTrendingTerms();
-
-    for (let i = 0; i < limit; i++) {
-      let term = `<li><a href="#">${giphyArr[i]}</a></li>`;
-      terms.push(term);
-    }
-
-    return terms.join("\n");
-  };
-
   searchGifos = async () => {
-    this.lastPage = false;
-    this.offset = 0;
-
     this.closeAutocomplete();
-    this.openResults();
-    this.results.getElementsByTagName("h2")[0].innerHTML = this.searchBox.value;
+    this.resultsBox.getElementsByTagName(
+      "h2"
+    )[0].innerHTML = this.searchBox.value;
+
+    this.total = 0;
+    this.offset = 0;
+    this.lastPage = false;
     let query = {
       term: this.searchBox.value,
       limit: this.limit,
@@ -346,10 +340,51 @@ class GifosSearch {
 
     let giphyArr = await this.apiSearch(query);
     this.total = giphyArr.total;
-    this.resultsGrid.innerHTML = this.appendSlides(
-      giphyArr.images,
-      this.resultsSlideClass
-    );
+
+    if (!this.total) {
+      this.resultsGridBox.innerHTML = "";
+    } else {
+      this.resultsGridBox.innerHTML = this.appendSlides(
+        giphyArr.images,
+        this.resultsSlideClass
+      );
+    }
+
+    this.openResults();
+  };
+
+  openResults = () => {
+    let resultsContent = this.resultsBox.getElementsByClassName("grid")[0];
+    let resultsNotFound = this.resultsBox.getElementsByClassName(
+      "not-found"
+    )[0];
+
+    if (this.total > this.limit) {
+      resultsContent.style.display = "flex";
+      resultsNotFound.style.display = "none";
+      this.moreBttn.style.display = "inline-block";
+      this.moreBttn.style.visibility = "visible";
+    }
+
+    if (this.total && this.total < this.limit) {
+      resultsContent.style.display = "flex";
+      resultsNotFound.style.display = "none";
+      this.moreBttn.style.display = "inline-block";
+      this.moreBttn.style.visibility = "hidden";
+    }
+
+    if (!this.total) {
+      resultsContent.style.display = "none";
+      resultsNotFound.style.display = "flex";
+    }
+
+    if (this.resultsBox.classList.contains("results--hide"))
+      this.resultsBox.classList.replace("results--hide", "results--show");
+  };
+
+  closeResults = () => {
+    if (this.resultsBox.classList.contains("results--show"))
+      this.resultsBox.classList.replace("results--show", "results--hide");
   };
 
   nextPage = async () => {
@@ -369,7 +404,7 @@ class GifosSearch {
     let giphyArr = await this.apiSearch(query);
     const slides = this.appendSlides(giphyArr.images, this.resultsSlideClass);
 
-    this.resultsGrid.insertAdjacentHTML("beforeend", slides);
+    this.resultsGridBox.insertAdjacentHTML("beforeend", slides);
 
     if (this.total <= this.offset + this.limit * 2) {
       this.lastPage = true;
