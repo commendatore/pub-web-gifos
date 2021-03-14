@@ -33,9 +33,9 @@ const gifosSearchBox = new GifosSearch({ limit: 12, rating: "r" });
 if (gifosCommons.getPage() === "home") {
   gifosSearchBox.setSearchBox(
     giphy.search,
-    giphy.suggestions, // change for autocomplete endpoint
+    giphy.autocomplete,
     "search-box",
-    "search-suggestions-box",
+    "search-autocomplete-box",
     "search-submit-bttn",
     "search-clear-bttn",
     "results-box",
