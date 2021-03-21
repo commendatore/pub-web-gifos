@@ -100,7 +100,8 @@ class GifosSlides {
 
   setSlider = async (
     carouselId,
-    carouselClass,
+    carouselSlideClass,
+    carouselSlideOverlayClass,
     backwardBttnId,
     forwardBttnId,
     trendingGifsCallback
@@ -114,19 +115,34 @@ class GifosSlides {
     this.forwardBttn.addEventListener("click", this.forwardSlides);
 
     let giphyArr = await this.apiTrending({ rating: "r" });
-    let gifosSlides = this.appendSlides(giphyArr, carouselClass);
+    let gifosSlides = this.appendSlides(
+      giphyArr,
+      carouselSlideClass,
+      carouselSlideOverlayClass
+    );
     this.trendingSlider.innerHTML = gifosSlides.content;
     this.trendingSliderLength = gifosSlides.length;
   };
 
-  appendSlides = (giphyArr, classType) => {
+  appendSlides = (giphyArr, slideClass, overlayClass) => {
     let slides = [];
     let length = 0;
 
     giphyArr.forEach((giphy, i) => {
       let slide = `
-<div class="${classType}">
+<div class="${slideClass}">
 <img src="${giphy.url}" alt="${giphy.title}">
+<div class="${overlayClass}">
+<div>
+<input type="button" value="favorite" />
+<input type="button" value="download" />
+<input type="button" value="maximize" />
+</div>
+<div>
+<p>${giphy.username}</p>
+<p>${giphy.title}</p>
+</div>
+</div>
 </div>`;
 
       length = i + 1;
@@ -169,6 +185,7 @@ class GifosSearch {
     this.resultsGridBox = undefined;
     this.moreBttn = undefined;
     this.resultsSlideClass = undefined;
+    this.resultsSlideOverlayClass = undefined;
     this.apiTrendingTerms = undefined;
     this.trendingTermsBox = undefined;
   }
@@ -184,6 +201,7 @@ class GifosSearch {
     resultsGridBoxId,
     moreBttnId,
     resultsSlideClass,
+    resultsSlideOverlayClass,
     trendingTermsCallback = undefined,
     trendingTermsBoxId = undefined
   ) => {
@@ -197,6 +215,7 @@ class GifosSearch {
     this.resultsGridBox = document.getElementById(resultsGridBoxId);
     this.moreBttn = document.getElementById(moreBttnId);
     this.resultsSlideClass = resultsSlideClass;
+    this.resultsSlideOverlayClass = resultsSlideOverlayClass;
 
     this.searchBox.addEventListener("input", this.validateSearch);
     this.searchBox.addEventListener("keyup", ({ key }) => {
@@ -346,7 +365,8 @@ class GifosSearch {
     } else {
       this.resultsGridBox.innerHTML = this.appendSlides(
         giphyArr.images,
-        this.resultsSlideClass
+        this.resultsSlideClass,
+        this.resultsSlideOverlayClass
       );
     }
 
@@ -402,7 +422,11 @@ class GifosSearch {
     };
 
     let giphyArr = await this.apiSearch(query);
-    const slides = this.appendSlides(giphyArr.images, this.resultsSlideClass);
+    const slides = this.appendSlides(
+      giphyArr.images,
+      this.resultsSlideClass,
+      this.resultsSlideOverlayClass
+    );
 
     this.resultsGridBox.insertAdjacentHTML("beforeend", slides);
 
@@ -411,13 +435,24 @@ class GifosSearch {
     }
   };
 
-  appendSlides = (giphyArr, classType) => {
+  appendSlides = (giphyArr, slideClass, overlayClass) => {
     let slides = [];
 
     giphyArr.forEach((giphy) => {
       let slide = `
-<div class="${classType}">
+<div class="${slideClass}">
 <img src="${giphy.url}" alt="${giphy.title}">
+<div class="${overlayClass}">
+<div>
+<input type="button" value="favorite" />
+<input type="button" value="download" />
+<input type="button" value="maximize" />
+</div>
+<div>
+<p>${giphy.username}</p>
+<p>${giphy.title}</p>
+</div>
+</div>
 </div>`;
 
       slides.push(slide);

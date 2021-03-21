@@ -1,7 +1,96 @@
-@mixin display-flex($justify-content, $align-items, $align-items, $flex-wrap) {
+@mixin display-flex($direction, $justify, $align, $wrap) {
+  align-items: $align;
   display: flex;
-  justify-content: $justify-content;
-  align-items: $align-items;
-  flex-direction: $flex-direction;
-  flex-wrap: $flex-wrap;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+}
+
+@mixin slide-tools {
+  .slide-tools {
+    background-color: #572ee5b3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding-bottom: 3.125rem;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+
+    div:first-child {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 0.625rem;
+    }
+
+    div:last-child {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    input[type="button"] {
+      all: unset;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      border-radius: 0.375rem;
+      border: none;
+      color: transparent;
+      cursor: pointer;
+      display: inline-block;
+      height: 2rem;
+      margin-right: 0.625rem;
+      width: 2rem;
+    }
+
+    input[type="button"]:first-child {
+      background-image: url(../assets/icon-fav.svg);
+    }
+
+    input[type="button"]:nth-child(2) {
+      background-image: url(../assets/icon-download.svg);
+    }
+
+    input[type="button"]:last-child {
+      background-image: url(../assets/icon-max.svg);
+    }
+
+    input[type="button"]:first-child:hover {
+      background-image: url(../assets/icon-fav-hover.svg);
+    }
+
+    input[type="button"]:nth-child(2):hover {
+      background-image: url(../assets/icon-download-hover.svg);
+    }
+
+    input[type="button"]:last-child:hover {
+      background-image: url(../assets/icon-max-hover.svg);
+    }
+
+    p {
+      all: unset;
+      color: #fff;
+      display: block;
+      font-family: $primary-font;
+      font-size: 0.938rem;
+      font-weight: 400;
+      padding: 0 1.125rem;
+      text-align: start;
+      width: 100%;
+    }
+
+    p:last-child {
+      font-size: 1rem;
+      font-weight: bold;
+      padding-top: 0.375rem;
+    }
+  }
+
+  &:hover {
+    .slide-tools {
+      z-index: 1;
+    }
+  }
 }

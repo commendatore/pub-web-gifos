@@ -1,10 +1,11 @@
 // 320px mobile design
 .header {
+  background-color: var(--header-bg-color);
+  border-top: 0.313rem solid var(--header-border-top-color);
+  height: 6.25rem;
   position: fixed;
   width: 100vw;
-  height: 6.25rem;
-  border-top: 0.313rem solid var(--header-border-top-color);
-  background-color: var(--header-bg-color);
+  z-index: 11;
 }
 
 .navbar {
@@ -42,18 +43,15 @@
   );
 }
 
-// FIXME: HIDE OVERFLOW ON HEADER
 .navbar-menu--show {
   top: 5.938rem;
   transform: translateX(0);
   transition: transform 0.33s ease;
 }
 
-// TODO: ADD SEPARATED ANIM CLASSES
 .navbar-menu--close {
   top: 5.938rem;
   transform: translateX(100%);
-  // transition: transform 0.33s ease;
 }
 
 .navbar-menu__list {

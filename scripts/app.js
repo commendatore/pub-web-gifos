@@ -23,6 +23,7 @@ if (gifosCommons.getPage() !== "create") {
   gifosSlides.setSlider(
     "carousel-box",
     "carousel-slider__slide",
+    "slide-tools",
     "carousel-backward-bttn",
     "carousel-forward-bttn",
     giphy.trendingGifs
@@ -42,6 +43,7 @@ if (gifosCommons.getPage() === "home") {
     "grid-box",
     "more-bttn",
     "grid__slide",
+    "slide-tools",
     giphy.trendingSearch,
     "trending-terms-box"
   );

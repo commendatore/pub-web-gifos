@@ -37,6 +37,7 @@
 }
 
 .grid__slide {
+  position: relative;
   display: flex;
   height: calc((((20 - (1.25 * 0) - (2 * 1.25)) / 1 / 20) * 120 / 155) * 100vw);
   justify-content: center;
@@ -49,6 +50,10 @@
     height: 100%;
     object-fit: fill;
     width: 100%;
+  }
+
+  .slide-tools {
+    display: none;
   }
 }
 
@@ -97,6 +102,8 @@
     height: calc(
       (((48 - (1.875 * 0) - (2 * 9.688)) / 1 / 48) * 200 / 260) * 100vw
     );
+
+    @include slide-tools;
   }
 }
 
