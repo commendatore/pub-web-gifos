@@ -1,0 +1,196 @@
+.modal {
+  background-color: rgba(var(--modal-bg-color-dec), var(--modal-bg-alpha-dec));
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  left: 0;
+  overflow: auto;
+  padding: 0 1.875rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 11;
+}
+
+.modal > div {
+  display: flex;
+  flex-direction: column;
+  margin: auto auto;
+  max-width: 40rem;
+  min-width: 16.25rem;
+  width: 100%;
+
+  input[type="button"] {
+    all: unset;
+    align-self: flex-end;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    color: transparent;
+    cursor: pointer;
+    display: inline-block;
+    height: 0.875rem;
+    margin: 0 0.563rem 4.375rem 0;
+    width: 0.875rem;
+  }
+
+  input[type="button"]:first-child {
+    background-image: url(../assets/close.svg);
+  }
+
+  div:nth-child(2) {
+    display: flex;
+    max-width: 100%;
+    min-width: 16.25rem;
+
+    div {
+      all: unset;
+      width: 100%;
+    }
+
+    img {
+      display: block;
+      margin: auto;
+      height: auto;
+      width: 100%;
+    }
+
+    input[type="button"] {
+      display: none;
+    }
+  }
+
+  div:last-child {
+    all: unset;
+    display: flex;
+    justify-content: space-between;
+
+    div:first-child {
+      all: unset;
+      display: flex;
+      flex-direction: column;
+      padding-top: 0.875rem;
+      width: 100%;
+
+      p {
+        all: unset;
+        color: #000;
+        display: inline-block;
+        font-family: $primary-font;
+        text-align: start;
+        width: 100%;
+      }
+
+      p:first-child {
+        font-size: 0.938rem;
+        font-weight: 400;
+        padding-bottom: 0.375rem;
+      }
+
+      p:last-child {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+
+    div:last-child {
+      display: flex;
+      padding-top: 1.063rem;
+
+      input[type="button"] {
+        align-self: flex-start;
+        border-radius: 0.375rem;
+        border: 0.063rem solid #9cafc3;
+        display: inline-block;
+        height: 2.25rem;
+        margin: 0;
+        visibility: visible;
+        width: 2.25rem;
+      }
+
+      input[type="button"]:first-child {
+        margin-right: 1.375rem;
+        background-image: url(../assets/icon-fav.svg);
+      }
+
+      input[type="button"][data-favorite]:first-child {
+        background-image: url(../assets/icon-fav-active.svg);
+      }
+
+      input[type="button"]:last-child {
+        background-image: url(../assets/icon-download.svg);
+      }
+
+      input[type="button"]:first-child:hover:not([data-favorite]) {
+        background-image: url(../assets/icon-fav-hover.svg);
+      }
+
+      input[type="button"]:last-child:hover {
+        background-image: url(../assets/icon-download-hover.svg);
+      }
+    }
+  }
+}
+
+// 700px = desktop & tablet
+@media (min-width: 43.75rem) {
+  .modal {
+    padding: 0;
+  }
+
+  .modal > div {
+    max-width: 57.188rem;
+    min-width: 43.75rem;
+
+    input[type="button"] {
+      height: 0.95rem;
+      margin: 0 0.75rem 4.875rem 0;
+      width: 0.95rem;
+    }
+
+    div:nth-child(2) {
+      min-width: 43.75rem;
+
+      input[type="button"] {
+        display: inline-block;
+        height: 2.5rem;
+        width: 2.5rem;
+        visibility: hidden;
+      }
+
+      input[type="button"]:first-child {
+        background-image: url(../assets/button-slider-left.svg);
+        margin: auto 1.563rem auto 2.813rem;
+
+        &:hover {
+          background-image: url(../assets/button-slider-left-hover.svg);
+        }
+      }
+
+      input[type="button"]:last-child {
+        background-image: url(../assets/Button-Slider-right.svg);
+        margin: auto 2.813rem auto 1.563rem;
+
+        &:hover {
+          background-image: url(../assets/Button-Slider-right-hover.svg);
+        }
+      }
+    }
+
+    div:last-child {
+      all: unset;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 6.875rem;
+
+      div:first-child {
+        padding-top: 1.688rem;
+      }
+
+      div:last-child {
+        padding: 1.375rem 0.25rem 0 0;
+      }
+    }
+  }
+}
