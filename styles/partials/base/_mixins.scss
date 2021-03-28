@@ -8,7 +8,7 @@
 
 @mixin slide-tools {
   .slide-tools {
-    background-color: #572ee5b3;
+    background-color: var(--slide-tools-bg-color);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -49,6 +49,10 @@
       background-image: url(../assets/icon-fav.svg);
     }
 
+    input[type="button"][data-favorite]:first-child {
+      background-image: url(../assets/icon-fav-active.svg);
+    }
+
     input[type="button"]:nth-child(2) {
       background-image: url(../assets/icon-download.svg);
     }
@@ -57,7 +61,7 @@
       background-image: url(../assets/icon-max.svg);
     }
 
-    input[type="button"]:first-child:hover {
+    input[type="button"]:first-child:hover:not([data-favorite]) {
       background-image: url(../assets/icon-fav-hover.svg);
     }
 
@@ -71,7 +75,7 @@
 
     p {
       all: unset;
-      color: #fff;
+      color: var(--slide-tools-text-color);
       display: block;
       font-family: $primary-font;
       font-size: 0.938rem;
